@@ -1,0 +1,870 @@
+About console.
+About browsers and code compatability.
+
+syntax:
+======= 
+Every statement ends with semicolon; 
+
+Spaces and tabs are ignored. 
+ 
++ - for concatenation. 
+ 
+alert("test \n test"); 
+
+\\ - for singe line commenting 
+ 
+\* - *\ for multi line commenting 
+ 
+Variables:
+========== 
+ 
+var x; 
+ 
+var x, y, z; 
+ 
+Initial value is “undefined”. 
+ 
+Assign value: x = 5; 
+ 
+Assign while defining var x = 5, y = 10; 
+ 
+In IE old versions one variable will be created for every id in DOM. So if we use variable without defining it we will get errors. 
+ 
+Variable name must start with $, _ or an alphabet. 
+ 
+Js is case sensitive. “test” and “Test” are two different variables. 
+ 
+var, function, return, class, implements are reserved words. 
+ 
+Datatypes are string, number, Boolean, object.  
+ 
+Weekly typed language – we can assign any type of value to any type of variable. 
+ 
+ 
+User interaction:
+================= 
+ 
+alert(“test”); 
+ 
+var age = prompt("Enter your age"); 
+var age = prompt("Enter your age", 16); 
+ 
+result = confirm("Say yes/no"); 
+ 
+We can’t change the position/UI of the alert/confirm/prompt. Don’t try it. But, these are simple to use.  
+ 
+Operators:
+========== 
+ 
+Arithmetic: +, -, *, /, % 
+ 
+++ / -- increment / decrement operators 
+ 
+Suffix: a = 2; alert(a); alert(a++); alert(a); 
+ 
+Prefix: a = 2; alert(a); alert(++a); 
+ 
+Logical: AND ( && ), OR ( || ), NOT ( ! ) 
+ 
+OR  - returns first truthy value or last falsy value. 
+ 
+AND - returns last truthy value or first falsy value. 
+ 
+Double not(!!) – convert any data type to Boolean. 
+ 
+IF 
+==
+ 
+if (price > 100) { 
+ 
+} else { 
+ 
+} 
+ 
+Else if 
+=======
+ 
+if (userId > 1) { 
+ 
+} else if (userId == 1) { 
+ 
+} else if (userId == 0) { 
+ 
+}else{ 
+ 
+} 
+ 
+Switch:
+====== 
+ 
+switch(x) { 
+  case 'value1':  // if (x === 'value1') 
+    ... 
+  case 'value2':  // if (x === 'value2') 
+    ... 
+  default:        
+    // default code 
+} 
+ 
+Ternary:
+======== 
+ 
+result = condition ? value_if_true : value_if_false 
+ 
+Loops:
+====== 
+ 
+while(i<10) { 
+  // do something 
+} 
+----------------------------------------------------------- 
+do { 
+  // something 
+} while (i<10) 
+----------------------------------------------------------- 
+for(var i=1;i<=10;i++) { 
+  console.log(i); 
+} 
+----------------------------------------------------------- 
+var i=1; 
+for(;i<=10;i++) { 
+  console.log(i); 
+} 
+----------------------------------------------------------- 
+for(;;) { 
+  console.log("test"); 
+} 
+ 
+ 
+Break: 
+======
+var i=0; 
+while(true) { 
+  i += 1; 
+  console.log(i); 
+  if (i>5) break; 
+  console.log("test"); 
+} 
+ 
+Continue:
+========= 
+var i = -3; 
+while(i<3) { 
+  i++; 
+  if (i==0) continue; 
+  console.log(i); 
+} 
+ 
+Functions:
+========== 
+
+// Named function 
+function greet(name) { 
+  console.log("Hi, "+name) 
+} 
+
+// Anonymous function
+var greet = function(name) { 
+  console.log("Hi, "+name) 
+}
+
+greet('John');
+
+If a function don't return anything, by default "undefined" will be returned.
+
+variables declared inside function are local to that function.
+
+pass function through variables: 
+
+var test = greet;
+test('John');
+
+Pass one function as argument to another function:
+
+function callOtherFunction(f){
+	f("John");
+}
+
+callOtherFunction(greet);
+
+We can pass functions through variables or as arguments to other functions.
+
+Self calling functions / Immediately invoked functions:
+
+(function() {
+  
+	var a, b;
+	
+})()
+
+all the variables becomes local to that function only.
+
+String Manipulations:
+=====================
+var text = "my value";
+var anotherText = 'another string';
+both are same
+
+\ - to escape special characters in the string. 
+
+var str = " double " quote ";
+
+var str = " double \" quote ";
+
+str.length
+
+str.charAt(0)
+
+str.toUpperCase()
+
+str.toLowerCase()
+
+indexOf: returns the position of a first occurence of a substring
+var str = "Widget with id"
+alert( str.indexOf("Widget") ) // 0
+alert( str.indexOf("id") ) // 1
+alert( str.indexOf("Lalala") ) // -1
+
+str.indexOf("id", 2) //search from char2
+
+str.lastIndexOf("id");
+
+Extracting a substring: substring, substr, slice
+
+substring(start, end) - exclude the end position
+
+var str = "stringify"
+alert(str.substring(0,1))
+
+if we don't give end, it will take upto end
+
+substr(start [, length])
+start, how many characters to extract
+
+var str = "stringify"
+str = str.substr(2,4) // ring
+alert(str)
+
+omitting the length will lead to end of the string
+
+slice(start [, end])
+same as substring.Difference is handling the negative and overflow values
+
+"testme".substring(-2)  negative values becomes 0
+"testme".slice(-2)			count from the end of the string
+
+"testme".slice(1, -1) 
+
+Numbers:
+========
+
+alert(1/0)
+alert(-1/0)
+
+NaN
+0 / 0 - failed to do mathematical calculation
+
+it is not equal to anything, including itself
+
+isNaN(0/0)
+
+if we want to check is number use !isNaN
+
+parseInt('12px')
+
+parseFloat('12.3.4')
+
+Except +, other operators automatically parse string to numbers
+
+Math.floor
+Rounds down
+Math.ceil
+Rounds up
+Math.round
+Rounds to nearest
+
+alert( Math.floor(3.1) )  // 3
+alert( Math.ceil(3.1) )   // 4
+alert( Math.round(3.1) )  // 3
+
+
+var a = 12.34
+alert( a.toFixed(1) ) // "12.3"
+
+var a = 12.34
+alert( a.toFixed(5) ) // "12.34000"
+
+Math.random()
+
+typeof:
+=======
+
+typeof undefined // "undefined" 
+
+typeof 0    // "number" 
+ 
+typeof true // "boolean" 
+
+typeof "foo" // "string" 
+
+typeof {} // "object" 
+
+typeof function(){} // "function" 
+
+
+alert( typeof {} ) // 'object'
+alert( typeof [] ) // 'object'
+alert( typeof new Date ) // 'object'
+
+alert( typeof "lalala" ) // string
+alert( typeof new String("lalala") ) // object
+
+instanceof: for checking type of custom objects
+===========
+var test = new String("abc");
+test instanceof String
+
+var test2 = "tst";
+test2 instanceof String
+
+function Animal(name) { 
+  this.name = name
+}
+var animal = new Animal("cow");
+alert( animal instanceof Animal ) // true
+
+Arrays:
+======
+[]
+new Array()
+.length
+.pop()
+.push()
+
+shift/unshift from strat:
+
+var fruits = ["Apple", "Orange"]
+
+var apple = fruits.shift() // now we have only ["Orange"] left
+
+fruits.unshift("Lemon") // now got ["Lemon", "Orange"]
+
+alert(fruits.length) // 2
+
+join and split:
+var fruits = ["Lemon","Apple","Orange","Peach"];
+
+var str = fruits.join(', ');
+
+alert(str);
+------------------
+var fruits = "Apple,Orange,Peach";
+
+var arr = fruits.split(',');
+
+// arr is ["Apple", "Orange", "Peach"]
+
+alert(arr[0]);
+
+
+var arr = [0, 1, 2, 3];
+arr.length = 2; //trims the last two elements
+arr.length = 20;
+
+
+var arr = ["Go", "to", "home"]
+delete arr[1]
+// now arr = ["Go", undefined, "home"]
+alert(arr[1]) // undefined
+
+
+splice:
+arr.splice(index, deleteCount[, elem1, ..., elemN])
+
+var arr = ["Go", "to", "home"]
+arr.splice(1, 1)  // remove 1 element starting at index 1
+alert( arr.join(',') ) // ["Go", "home"] (1 element removed)
+
+splice returns array of removed elements.
+
+replace elements:
+var arr = ["Go", "to", "home", "now"];
+// remove 3 first elements and add two
+arr.splice(0, 3, "Come", "here") 
+alert( arr ) // ["Come", "here", "now"]
+
+
+insert elements, just set deleteCount to 0
+var arr = ["Go", "to", "home"];
+// from 2nd position 
+// delete 0 
+// and insert "my", "sweet"
+arr.splice(2, 0, "my", "sweet") 
+alert( arr) // "Go", "to", "my", "sweet", "home"
+
+a negative index, which counts from array end
+var arr = [1, 2, 5]
+
+// at element -1 (pre-last)
+// delete 0 elements, 
+// then insert 3 and 4
+arr.splice(-1, 0, 3, 4)
+
+alert(arr)  // 1,2,3,4,5
+
+
+slice:
+var arr = ["Why", "learn", "JavaScript"];
+
+var arr2 = arr.slice(0,2) // take 2 elements starting at 0
+
+alert(arr2.join(', ')) // "Why, learn"
+it will return the sliced elements.
+ 
+if we miss the length, it will take until end.
+ 
+.reverse
+
+.sort
+points.sort(function(a, b){return a-b});
+The function should return a negative, zero, or positive value, depending on the arguments.
+
+Objects:
+========
+var user = new Object();
+var user = { };
+user.name = 'John'
+delete user.name
+
+We can also use [] to access/edit object.
+
+var box = {
+	width: 200,
+	length: 300,
+	shapes: ["square","rectangle"],
+	draw: function(){
+	
+	},
+	type: {}
+} 
+
+Non-existing properties returns undefined
+
+Built in objects:
+Array();
+String();
+Date();
+
+this:
+=====
+Creating custom object:
+
+function User(name) {
+  this.name = name
+ 
+  this.sayHi = function() {
+    alert(" I am "  +this.name)
+  };
+}
+
+var john = new User("John")
+var peter = new User("Peter")
+
+john.sayHi()
+peter.sayHi()
+
+The value of this is dynamic in JavaScript. It is determined when function is called, not when it is declared.
+
+var john = { 
+  firstName: "John" 
+}
+
+function func() { 
+  alert(this.firstName + ": hi!")
+}
+
+john.sayHi = func
+
+john.sayHi()  // this = john
+
+
+As function
+func(...)        // this = window
+
+As method
+obj.func(...)    // this = obj
+
+call/apply
+func.call(context, arg1, arg2, ...)  // this = context
+func.apply(context, [args])
+
+The syntax of call:
+func.call(obj, arg1, arg2,...)
+The first argument of call becomes this, other arguments arg1, arg2... become arguments.
+
+var john = { 
+  firstName: "John" 
+}
+
+function func() { 
+  alert( this.firstName )
+}
+
+func.call(john)  // "John"
+
+
+var john = { 
+  firstName: "John",
+  surname: "Smith"
+}
+
+function func(a, b) { 
+  alert( this[a] + ' ' + this[b] )
+}
+
+func.call(john, 'firstName', 'surname')  // "John Smith"
+
+The func.apply is same as func.call, but it accepts an array of arguments instead of a list.
+
+The following two lines are same:
+func.call(john, 'firstName', 'surname')
+ 
+func.apply(john, ['firstName', 'surname'])
+
+OOPS:
+=====
+
+Prototypal inheritance:
+
+In other languages Classes inherit from other classes.
+
+The object, referenced by __proto__ is called a prototype.
+
+function simpleCalc(){
+	this.add = function(){
+	 console.log("Addition is simple"); 
+	};
+	this.subtract = function(){
+		console.log("Subtraction is simple"); 
+	}
+}
+
+var simpleObj = new simpleCalc();
+
+simpleObj.add()
+    
+function complexCalc(){
+	this.multiplication=function(){
+	 console.log("Multiplication is complex"); 
+	};
+	this.division=function(){
+		console.log("Division is complex"); 
+	}
+}
+
+var complexObj = new complexCalc();
+
+complexObj.__proto__ = simpleObj;
+complexCalc.prototype = simpleObj;
+
+complexObj.multiplication()
+
+
+function veryComplexCalc(){
+  return {
+    modulas: function(){
+     console.log("Modulas is vaery complex"); 
+    }
+  }
+}
+                                                 
+var veryComplexObj = new veryComplexCalc();
+
+veryComplexObj.__proto__ = complexObj;
+
+__proto__ is available in modern browsers. Two write in other browsers use below functions,
+
+Object.create:
+--------------
+var animal = { eats: true }
+rabbit = Object.create(animal)
+rabbit.jumps = true
+
+Object.getPrototypeOf:
+----------------------
+Object.getPrototypeOf(rabbit) //animal
+
+prototype:
+==========
+var animal = { eats: true }
+
+function Rabbit(name) { 
+  this.name = name
+}
+
+Rabbit.prototype = animal 
+
+var rabbit = new Rabbit('John')
+
+alert( rabbit.eats ) // true, because rabbit.__proto__ == animal
+
+hasOwnProperty:
+==============
+function Rabbit(name) {
+  this.name = name
+}
+
+Rabbit.prototype = { eats: true }
+
+var rabbit = new Rabbit('John')
+
+alert( rabbit.hasOwnProperty('eats') ) // false, in prototype
+
+alert( rabbit.hasOwnProperty('name') ) // true, in object
+
+
+Date.prototype 
+String.prototype
+
+constructor:
+------------
+An object has a build-in property named constructor. It is meant to reference the function which made the object, but it fails to do it sometimes.
+
+
+DOM:
+====
+Document Object Model (DOM)
+ allow to access contents of the page, modify elements etc
+
+Browser Object Model (BOM)
+ BOM is a pack of objects that allow to control the browser
+ 
+JavaScript objects and functions
+	gives us access to DOM, BOM and provides objects and functions of its own
+	
+The DOM represents a document as a tree. The tree is made up of parent-child relationships, a parent can have one or many children nodes.
+
+Traversing:
+----------
+document.body
+document.body.childNodes
+body.firstChild
+body.lastChild
+
+
+properties:
+document.body.nodeName
+
+document.body.nodeType
+ELEMENT_NODE       = 1;
+TEXT_NODE          = 3;
+COMMENT_NODE       = 8;
+
+
+document.body.innerHTML - works for element nodes only
+
+nodeValue - for other elements
+
+<body>
+  The text
+  <!-- A comment -->
+  <script>
+    for(var i=0; i<document.body.childNodes.length; i++) {
+      alert(document.body.childNodes[i].nodeValue)
+    }
+  </script>
+</body>
+
+document.getElementById:
+<body>
+  <div id="info">Info</div>
+  <script>
+    var div = document.getElementById('info')
+    alert( div.innerHTML )
+  </script>
+</body>
+---------------------------------------------------
+var elements = document.getElementsByTagName('div'):
+<table id="myTable">
+  <tr>
+    <td>Your age:</td>
+
+    <td>
+      <label>
+        <input type="radio" name="age" value="young" checked/> under 18
+      </label>
+      <label>
+        <input type="radio" name="age" value="mature"/> from 18 to 50
+      </label>
+      <label>
+        <input type="radio" name="age" value="senior"/> older than 60
+      </label>
+    </td>
+  </tr>
+
+</table>
+
+<script>
+var elements = document.getElementsByTagName('input')
+  for(var i=0; i<elements.length; i++) {
+    var input = elements[i]  
+    alert(input.value+': '+input.checked)
+  }
+</script>
+
+---------------------------------------------------
+document/node.getElementsByClassName
+<div class="a b c">Yep</div>
+<script>
+alert( document.getElementsByClassName('a')[0].innerHTML )
+</script>
+
+var elements = document.getElementsByName('age')
+
+
+document/node.querySelector, querySelectorAll:
+--------------------------------------------
+The methods querySelector and querySelectorAll allow to select elements by CSS 3 query.
+<ul>
+  <li>The</li>
+  <li>Test</li>
+</ul>
+<ul>
+  <li>Is</li>
+  <li>Passed</li>
+</ul>
+<script>
+  var elements = document.querySelectorAll('UL > LI:last-child')
+
+  for(var i=0; i<elements.length; i++) {
+    alert(elements[i].innerHTML )
+  }
+</script>
+
+
+Events:
+=======
+
+<input id="b1" value="Click me" onclick="alert('Thanks!');" type="button"/>
+
+Inside an event handler, this references the current element.
+
+<button onclick="alert(this.innerHTML)">Click me to see me</button>
+
+Using a DOM-object property:
+<input id="myElement" type="button" value="Press me"/>
+<script>
+document.getElementById('myElement').onclick = function() {
+    alert('Thanks')
+}
+</script>
+
+
+if (document.addEventListener) {
+    var addEvent = function(elem, type, handler) {
+        elem.addEventListener(type, handler, false)
+    }
+    var removeEvent = function(elem, type, handler) {
+        elem.removeEventListener(type, handler, false)
+    }
+} else {
+    var addEvent = function(elem, type, handler) {
+        elem.attachEvent("on" + type, handler)
+    }
+    var removeEvent = function(elem, type, handler) {
+        elem.detachEvent("on" + type, handler)
+    }
+}
+
+...
+addEvent(elem, "click", function() { alert('hi') })
+
+
+Obtaining the event object:
+element.onclick = function(event) {
+ // process data from event
+}
+
+mousedown
+Triggered by an element when a mouse button is pressed down over it
+mouseup
+Triggered by an element when a mouse button is released over it
+mouseover
+Triggered by an element when the mouse comes over it
+mouseout
+Triggered by an element when the mouse goes out of it
+mousemove
+Triggered by an element on every mouse move over it.
+
+click
+Triggered by a mouse click: mousedown and then mouseup over an element
+contextmenu
+Triggered by a right-button mouse click over an element.
+dblclick
+Triggered by two clicks within a short time over an element
+
+keydown
+A key is pressed down.
+keypress
+A character key is pressed.
+keyup
+A key is released.
+
+Exceptions:
+===========
+window.onerror = function (msg, url, line) {
+    alert("Message : " + msg );
+    alert("url : " + url );
+    alert("Line number : " + line );
+}
+
+new Error([message[, fileName[, lineNumber]]])
+
+The Error constructor creates an error object. Instances of Error objects are thrown when runtime errors occur. The Error object can also be used as a base object for user-defined exceptions
+
+try {
+  throw new Error('Whoops!');
+} catch (e) {
+  console.log(e.name + ': ' + e.message);
+}
+
+
+function myFunc(){
+    var a = 100;
+    
+    try {
+      alert("Value of variable a is : " + a );
+    }
+    
+    catch ( e ) {
+      alert("Error: " + e.description );
+    }
+    
+    finally {
+      alert("Finally block will always execute!" );
+    }
+}
+
+try{
+  if ( b == 0 ){
+      throw( "Divide by zero error." ); 
+  }
+  
+  else
+  {
+      var c = a / b;
+  }
+}
+
+catch ( e ) {
+  alert("Error: " + e );
+}
+
+JavaScript Libraries:
+=====================
+- moment
+- lodash
+- jquery
+
+- Practical examples are fileupload, generate excel, generate pdf etc..
+

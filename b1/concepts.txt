@@ -1,0 +1,20 @@
+Javascript
+    - Simple app using plain js and simple libraries
+    - Convert the app to node module
+
+Jquery
+    - Simple app using Jquery
+
+Html
+Css
+Bootstrap
+    - Simple app using Html, Css, Javascript, Jquery
+
+Javascript ES6 features
+    - Simple app using ES6 features
+
+Typescript
+    - App using Typescript (tsc and lite-server)
+    - Build the same app using Webpack
+
+Angular
