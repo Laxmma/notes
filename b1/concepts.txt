@@ -18,3 +18,7 @@ Typescript
     - Build the same app using Webpack
 
 Angular
+    - App containing pocs
+    - Tutorial app - tour of heros
+    - TO-DO application by toodmoto
+    - App with authentication etc...
