@@ -1,1 +1,1 @@
-# Notes and examples for UI developer course.
+# Notes and examples
