@@ -1,5 +1,14 @@
-About console.
-About browsers and code compatability.
+Basics:
+=======
+- JavaScript is a scripting language used to add interactive features to webpages.
+
+- We have many browsers. All the browsers don't behave in same way. Some features are not supported by few browsers.
+
+- Console is the tool to debug the code. We can access the script / DOM elements from console. Also, we can run new code from console.
+
+- We can include scripts in 3 ways. Inline, Infile and from CDN / Remote.
+
+- Browser interpret the script files one after the another. It don't evaluate in concurrently. 
 
 syntax:
 ======= 
@@ -9,7 +18,10 @@ Spaces and tabs are ignored.
  
 + - for concatenation. 
  
-alert("test \n test"); 
+alert("test \n test");
+
+var str = "test \
+test"; // Escaping new line
 
 \\ - for singe line commenting 
  
@@ -867,4 +879,24 @@ JavaScript Libraries:
 - jquery
 
 - Practical examples are fileupload, generate excel, generate pdf etc..
+
+
+use strict:
+===========
+It's ES5 feature.
+
+JavaScript engine start interpret the code in modern mode / strict mode. It enables the strict mode in javascript engine.
+
+"use strict" must be placed at top of the file OR beginning of the function. If it is plced in the middle of the code strict mode won't be enabled.
+
+Below are the few features implemented in strict mode. We get exceptions in strict mode for below cases,
+
+- Disallows global variables. (Catches missing var declarations and typos in variable names)
+- Silent failing assignments will throw error in strict mode (assigning NaN = 5;)
+- Attempts to delete undeletable properties will throw (delete Object.prototype)
+- Function parameter names must be unique (function sum (x, x) {...})
+- Forbids octal syntax (var x = 023; some devs assume wrongly that a preceding zero does nothing to change the number.)
+- Forbids the with keyword
+- Forbids deleting plain names (delete x;)
+- etc...
 
