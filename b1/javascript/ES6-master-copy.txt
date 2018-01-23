@@ -1,12 +1,14 @@
-let: 
-It's a new way/new keyword introduced to defined with new features. 
-Adding new features to "var" keyword will generate many backword compatability issues.
+let:
+====
+It's a new way/new keyword introduced to define variables with new features.
+ 
+Adding new features to "var" keyword will generate many backword compatability issues. So, introduced 'let' keyword.
 
 Variable hoisting with var:
 
 var doWork = function(){
 	return x;
-}
+} // Return error.
 
 var doWork = function(flag){
     var x;
@@ -14,22 +16,14 @@ var doWork = function(flag){
         x = 3;
     }	
     return x;
-}
-
-var doWork = function(flag){
-    var x;
-    if(flag){
-        x = 3;
-    }	
-    return x;
-}
+} // Don't get error.
 
 var doWork = function(flag){
     if(flag){
         var x = 3; //This Variable will be hoisted
     }	
     return x;
-}
+} // We should get error. But, we don't get because the variable x is hoisted to top of the function.
 
 Function hoisting:
 Function declarations are also hoisted.
@@ -96,6 +90,7 @@ var doWork = function(){
 
 
 const:
+======
 const LIMIT = 10;
 
 LIMIT = 20; // Give an error
@@ -111,6 +106,7 @@ Scope of const also block level.
 })();
 
 Destructuring:
+==============
 Assigning values to variables in a different way.
 
 let x = 2;
@@ -170,6 +166,7 @@ hitServer("/users", {
 });
 
 Default parameters:
+===================
 ES5:
 var doWork = function(name){
     name = name || 'Igor';
@@ -178,12 +175,6 @@ var doWork = function(name){
 doWork("John");
 
 ES6:
-var doWork = function(name){
-    name = name || 'Igor';
-    console.log(name);
-}
-doWork("John");
-
 let doWork = function(name = "Igor"){
     console.log(name);
 }
@@ -219,8 +210,9 @@ hitServer("/users", {
 });
 
 Rest parameters:
+================
 Rest of the parameters in a function.
-If the number of arguments are not fixed we can use rest parameters.
+If the number of parameters are not fixed we can use rest parameters.
 
 ES5:
 var doWork = function(){
@@ -259,6 +251,7 @@ doWork("John", 1, 2, 3, 4, "doe");
 Rest parameters are part of function defination.
 
 Spread operator:
+================
 spread is negation to Rest.
 It is part of the function calling statement or other.
 
@@ -271,7 +264,7 @@ let doWork = function(x, y, z){
 let arr = [1,2,3];
 doWork(...arr);
 doWork(...[4, 5, 6]);
-
+
 build new arrays:
 let a = [4,5,6];
 let b = [1,2,3,...a,7,8,9];
@@ -291,7 +284,7 @@ Execute the expressions:
 let x=1,y=2;
 let template = `${x} add ${y} is ${x+y}`;
 
-New line don't break:
+New lines don't break the code:
 let html = `<div>
 	<span>test</span>
 </div>`;
@@ -312,7 +305,7 @@ var multiply = (x, y) => {return x*y;};
 
 Curly brackets are not required if only one expression is present.
 
-The symbol => is called FAT ARROW.
+The symbol '=>' is called FAT ARROW.
 
 var multiply = (x, y) => x*y;
 
@@ -1024,7 +1017,9 @@ Modules:
 
 Good authors divide their books into chapters and sections; good programmers divide their programs into modules.
 
-Browsers are not yet supporting modulets feature in ES6.
+Browsers are not yet supporting modulets feature in ES6. So, we use module loaders like SystemJs, requireJs etc..
+
+A module loader is a polyfill to support modules in un supported browsers.
 
 http://exploringjs.com/es6/ch_modules.html
 
@@ -1039,42 +1034,4 @@ https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Pr
 .then() always returns a new promise, it’s possible to chain promises.
 
 https://www.sitepoint.com/overview-javascript-promises/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
