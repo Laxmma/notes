@@ -29,7 +29,6 @@ test"; // Escaping new line
  
 Variables:
 ========== 
- 
 var x; 
  
 var x, y, z; 
@@ -40,25 +39,20 @@ Assign value: x = 5;
  
 Assign while defining var x = 5, y = 10; 
  
-In IE old versions one variable will be created for every id in DOM. So if we use variable without defining it we will get errors. 
- 
 Variable name must start with $, _ or an alphabet. 
  
 Js is case sensitive. “test” and “Test” are two different variables. 
  
-var, function, return, class, implements are reserved words. 
+var, function, return, class, implements etc... are reserved words. 
  
-Datatypes are string, number, Boolean, object.  
- 
-Weekly typed language – we can assign any type of value to any type of variable.
-
 Data types:
 ===========
-
-JavaScript is dynamically typed language. We can assign any kind of data to any kind of variable.
+Weekly typed language – we can assign any type of value to any type of variable.
+JavaScript is dynamically typed language. Depends on context it will decide the data type.
+Ex: 10 - '2' = 8
 
 // no error
-let message = "hello";
+var message = "hello";
 message = 123456;
 
 7 kinds of data types:
@@ -73,7 +67,6 @@ symbol for unique identifiers.
 
 typeof:
 =======
-
 typeof is used to check the datatype of variable.
 
 typeof undefined // "undefined" 
@@ -89,12 +82,12 @@ typeof {} // "object"
 typeof function(){} // "function". There is no function data type. It comes under object type. But, typeof operator returns it as function for better differentiation from objects.
 
 
-alert( typeof {} ) // 'object'
-alert( typeof [] ) // 'object'
-alert( typeof new Date ) // 'object'
+typeof {} // 'object'
+typeof [] // 'object'
+typeof new Date // 'object'
 
-alert( typeof "lalala" ) // string
-alert( typeof new String("lalala") ) // object
+typeof "test" // string
+typeof new String("lalala") // object
 
 typeof Symbol("id") // "symbol"
 
@@ -162,7 +155,7 @@ indexOf: returns the position of a first occurence of a substring
 var str = "Widget with id"
 alert( str.indexOf("Widget") ) // 0
 alert( str.indexOf("id") ) // 1
-alert( str.indexOf("Lalala") ) // -1
+alert( str.indexOf("test") ) // -1
 
 str.indexOf("id", 2) //search from char2
 
@@ -287,29 +280,27 @@ switch(x) {
  
 Ternary:
 ======== 
- 
 result = condition ? value_if_true : value_if_false 
  
 Loops:
 ====== 
- 
 while(i<10) { 
   // do something 
 } 
------------------------------------------------------------ 
+---------------------------
 do { 
   // something 
 } while (i<10) 
------------------------------------------------------------ 
+---------------------------
 for(var i=1;i<=10;i++) { 
   console.log(i); 
 } 
------------------------------------------------------------ 
+---------------------------
 var i=1; 
 for(;i<=10;i++) { 
   console.log(i); 
 } 
------------------------------------------------------------ 
+---------------------------
 for(;;) { 
   console.log("test"); 
 } 
@@ -377,6 +368,8 @@ Self calling functions / Immediately invoked functions:
 
 all the variables becomes local to that function only.
 
+Constructor function:
+
 instanceof: for checking type of custom objects
 ===========
 var test = new String("abc");
@@ -413,9 +406,8 @@ join and split:
 var fruits = ["Lemon","Apple","Orange","Peach"];
 
 var str = fruits.join(', ');
-
 alert(str);
-------------------
+
 var fruits = "Apple,Orange,Peach";
 
 var arr = fruits.split(',');
