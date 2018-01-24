@@ -3,6 +3,8 @@ Basics:
 - JavaScript is a scripting language used to add interactive features to webpages.
 
 - We have many browsers. All the browsers don't behave in same way. Some features are not supported by few browsers.
+- JavaScript Engines - V8, Spidermonkey etc ...
+- https://quirksmode.org/
 
 - Console is the tool to debug the code. We can access the script / DOM elements from console. Also, we can run new code from console.
 
