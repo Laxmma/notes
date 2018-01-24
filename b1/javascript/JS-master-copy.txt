@@ -112,6 +112,7 @@ parseInt('12px')
 parseFloat('12.3.4')
 
 Except +, other operators automatically parse string to numbers
+10 + '2' //"102"
 
 Math.floor
 Rounds down
@@ -154,7 +155,7 @@ str.toUpperCase()
 str.toLowerCase()
 
 indexOf: returns the position of a first occurence of a substring
-var str = "Widget with id"
+var str = "Widget with id Widget"
 alert( str.indexOf("Widget") ) // 0
 alert( str.indexOf("id") ) // 1
 alert( str.indexOf("test") ) // -1
@@ -323,7 +324,7 @@ Continue:
 var i = -3; 
 while(i<3) { 
   i++; 
-  if (i==0) continue; 
+  if (i==0) continue; // It will skip 0 iteration and go to 1
   console.log(i); 
 } 
  
@@ -585,7 +586,6 @@ func.apply(john, ['firstName', 'surname'])
 
 OOPS:
 =====
-
 Prototypal inheritance:
 
 In other languages Classes inherit from other classes.
@@ -941,3 +941,8 @@ Below are the few features implemented in strict mode. We get exceptions in stri
 - etc...
 
 Example: use-strict.html
+
+
+Sites to Refer:
+===============
+http://javascript.info/
