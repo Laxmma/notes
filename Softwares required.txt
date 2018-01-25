@@ -1,0 +1,5 @@
+ - Git
+ - GitHub Account, GitHub for windows
+ - Visual studio code
+ - Slack
+ - NodeJs

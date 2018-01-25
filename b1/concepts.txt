@@ -1,16 +1,16 @@
-Start date: 24/01/2018
+Start date: 22/01/2018
 
-Javascript
+Javascript[ES5]
+Html
+Css
     - Simple app using plain js and simple libraries
     - Convert the app to node module
 
 Jquery
     - Simple app using Jquery
 
-Html
-Css
 Bootstrap
-    - Simple app using Html, Css, Javascript, Jquery
+    - Simple app using Bootstrap
 
 Javascript ES6 features
     - Simple app using ES6 features
