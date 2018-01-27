@@ -396,14 +396,16 @@ var animal = new Animal("cow");
 alert( animal instanceof Animal ) // true
 
 Arrays:
-======
+=======
 []
 new Array()
 .length
 .pop()
-.push()
+.push() // Operates at end.
 
-shift/unshift from strat:
+shift/unshift operates from start.
+shift - Remove the first elment.
+unshift - Add new element at starting.
 
 var fruits = ["Apple", "Orange"]
 
@@ -511,17 +513,12 @@ var box = {
 
 Non-existing properties returns undefined
 
-Built in objects:
-Array();
-String();
-Date();
-
 this:
 =====
 Creating custom object:
 
 function User(name) {
-  this.name = name
+  this.name = name;
  
   this.sayHi = function() {
     alert(" I am "  +this.name)
@@ -550,7 +547,7 @@ john.sayHi()  // this = john
 
 
 As function
-func(...)        // this = window
+func(...)        // this = window onject
 
 As method
 obj.func(...)    // this = obj
@@ -629,7 +626,7 @@ complexCalc.prototype = simpleObj; // Observe the difference from above line.
 
 complexObj.multiplication()
 
-
+// Another kind of constructor function
 function veryComplexCalc(){
   return {
     modulas: function(){
@@ -641,8 +638,6 @@ function veryComplexCalc(){
 var veryComplexObj = new veryComplexCalc();
 
 veryComplexObj.__proto__ = complexObj;
-
-__proto__ is available in modern browsers. Two write in other browsers use below functions,
 
 Object.create:
 --------------
@@ -804,13 +799,16 @@ The methods querySelector and querySelectorAll allow to select elements by CSS 3
 
 Events:
 =======
+Handle event with element attribute:
+------------------------------------
 <input id="b1" value="Click me" onclick="alert('Thanks!');" type="button"/>
 
 Inside an event handler, this references the current element.
 
-<button onclick="alert(this.innerHTML)">Click me to see me</button>
+  <button onclick="alert(this.innerHTML)">Click me to see me</button>
 
-Using a DOM-object property:
+Handle event with DOM-object property:
+--------------------------------------
 <input id="myElement" type="button" value="Press me"/>
 <script>
 document.getElementById('myElement').onclick = function() {
@@ -818,26 +816,15 @@ document.getElementById('myElement').onclick = function() {
 }
 </script>
 
+Handle event using addEventListener:
+------------------------------------
+// Add event to element
+elem.addEventListener(type, handler, false)
 
-if (document.addEventListener) {
-    var addEvent = function(elem, type, handler) {
-        elem.addEventListener(type, handler, false)
-    }
-    var removeEvent = function(elem, type, handler) {
-        elem.removeEventListener(type, handler, false)
-    }
-} else {
-    var addEvent = function(elem, type, handler) {
-        elem.attachEvent("on" + type, handler)
-    }
-    var removeEvent = function(elem, type, handler) {
-        elem.detachEvent("on" + type, handler)
-    }
-}
+// Remove event to element
+elem.removeEventListener(type, handler, false)
 
-...
-addEvent(elem, "click", function() { alert('hi') })
-
+// Capturing and bubling events.
 
 Obtaining the event object:
 element.onclick = function(event) {
@@ -871,12 +858,6 @@ A key is released.
 
 Exceptions:
 ===========
-window.onerror = function (msg, url, line) {
-    alert("Message : " + msg );
-    alert("url : " + url );
-    alert("Line number : " + line );
-}
-
 new Error([message[, fileName[, lineNumber]]])
 
 The Error constructor creates an error object. Instances of Error objects are thrown when runtime errors occur. The Error object can also be used as a base object for user-defined exceptions
@@ -921,6 +902,7 @@ catch ( e ) {
 
 JavaScript Libraries:
 =====================
+Explain self invoked functions.
 - moment
 - lodash
 - jquery
