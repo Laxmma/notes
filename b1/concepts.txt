@@ -24,3 +24,5 @@ Angular
     - Tutorial app - tour of heros
     - TO-DO application by toodmoto
     - App with authentication etc...
+	
+Interview Preparation

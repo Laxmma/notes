@@ -369,8 +369,9 @@ Self calling functions / Immediately invoked functions:
 	var a, b;
 	
 })()
-
 all the variables becomes local to that self calling function only.
+Example: self invoked function folder
+
 Global variables can be accessed from anywhere in the code. 
 Local variables can be accessed within the function block only.
 
@@ -693,6 +694,7 @@ Document Object Model (DOM)
 
 Browser Object Model (BOM)
  BOM is a pack of objects that allow to control the browser
+ // navigator object
  
 JavaScript objects and functions
 	gives us access to DOM, BOM and provides objects and functions of its own
@@ -894,21 +896,9 @@ try{
   {
       var c = a / b;
   }
-}
-
-catch ( e ) {
+}catch ( e ) {
   alert("Error: " + e );
 }
-
-JavaScript Libraries:
-=====================
-Explain self invoked functions.
-- moment
-- lodash
-- jquery
-
-- Practical examples are fileupload, generate excel, generate pdf etc..
-
 
 use strict:
 ===========
@@ -932,6 +922,13 @@ Below are the few features implemented in strict mode. We get exceptions in stri
 
 Example: use-strict.html
 
+
+JavaScript Libraries:
+=====================
+- moment
+- lodash / underscore js
+- jquery
+- Practical examples are fileupload, generate excel, generate pdf etc..
 
 Sites to Refer:
 ===============
