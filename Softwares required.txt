@@ -1,6 +1,0 @@
- - Git
- - GitHub Account, GitHub for windows
- - Visual studio code
- - Goto meeting app
- - Slack
- - NodeJs
