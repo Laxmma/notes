@@ -491,7 +491,7 @@ if we miss the length, it will take until end.
 
 .sort
 points.sort(function(a, b){return a-b});
-The function should return a negative, zero, or positive value, depending on the arguments.
+When the sort() method compares two values, it sends the values to the compare function, and sorts the values according to the returned (negative, zero, positive) value.
 
 Objects:
 ========
@@ -857,6 +857,10 @@ keypress
 A character key is pressed.
 keyup
 A key is released.
+
+window
+onload
+onunload
 
 Exceptions:
 ===========

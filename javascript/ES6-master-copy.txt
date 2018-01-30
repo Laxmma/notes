@@ -1023,7 +1023,7 @@ A module loader is a polyfill to support modules in un supported browsers.
 
 http://exploringjs.com/es6/ch_modules.html
 
-Modules in Typescript
+In JavaScript each file is a module and all objects defined in the file belong to that module. The module declares some objects to be public by marking them with the export key word. Other JavaScript modules use import statements to access public objects from other modules.
 
 
 Promises:
