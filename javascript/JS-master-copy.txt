@@ -934,6 +934,9 @@ JavaScript Libraries:
 - jquery
 - Practical examples are fileupload, generate excel, generate pdf etc..
 
+event.preventDefault();
+event.stopPropagarion();
+
 Sites to Refer:
 ===============
 http://javascript.info/

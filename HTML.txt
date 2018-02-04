@@ -1,0 +1,25 @@
+https://www.w3schools.com/html/default.asp
+
+A html page should contain only one element with one id. Having multiple elements with same id is wrong.
+
+
+IMP Concepts:
+=============
+- Font face - to apply external fonts to our webpage.
+  https://www.w3schools.com/cssref/css3_pr_font-face_rule.asp
+
+- rgb, rgba, hexa values of colors. ColorZilla is a chrome extension to get colors in webpage.
+
+- a:link, a:visited, a:hover, a:active are pseudo classes for anchor tag.
+
+- HTML Block and Inline Elements
+
+- Css float and clear properties
+
+- HTML5 Shim / Shiv, Modernizr.js
+
+- https://validator.w3.org/ - web page validation tool
+
+- Style guide - Generally style guides are supplied by designers / UX people.
+
+- Localstorage
