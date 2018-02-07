@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .parent {
+            border: 1px solid red;
+            padding: 10px;
+            /* overflow: auto; */
+        }
+        .clearfix::after {
+            content: ".";
+            visibility: hidden;
+            clear: both;
+            height: 0px;
+            display: block;
+        }
+        .child1, .child2 {
+            border: 1px solid green;
+            width: 40%;
+        }
+        .child1 {
+            float: left;
+        }
+        .child2 {
+            float: left;
+        }
+        .child3 {
+            border: 1px solid green;
+            clear: both;
+            margin-top: 5px;
+        }
+        .empty{
+            clear: both;
+        }
+        .line {
+            margin: 50px 0px;
+        }
+        /* ******* */
+        .content {
+            width: 100%;
+            border: 1px solid red;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        .three-parts {
+            width: 33%;
+            border: 1px solid green;
+            float: left;
+            margin-top: 5px;    
+        }
+        /* ******** */
+        .pushdown {
+            width: 100%;
+            border: 1px solid red;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .pushdown .left {
+            width: 75%;
+            border: 1px solid green;
+            min-height: 300px;
+            float: left;
+        }
+        .pushdown .right {
+            float: left;
+            width: 23%;
+            border: 1px solid green;
+            min-height: 300px;
+            margin-left: 1%;
+        }
+    </style>
+</head>
+<body>
+     <h1>By default float value is none;    </h1>   
+    <!-- see without styles -->
+    <!-- clear both for child3 -->
+    <!--  clearfix -->
+    <!-- clearing with overflow:auto and empty div -->
+    <div class="parent clearfix">
+        <div class="child1">Child1</div>
+        <div class="child2">Child2</div>
+        <!-- <div class="child3">Child3</div> -->
+        <!-- <div class="empty"></div> -->
+    </div>
+
+    <hr class="line">
+
+    <!-- Good to clearfix on row basis. -->
+    <div class="content clearfix">
+        <div class="three-parts">1/3</div>
+        <div class="three-parts">2/3</div>
+        <div class="three-parts">3/3</div>
+
+        <div class="three-parts">1/3</div>
+        <div class="three-parts">2/3</div>
+        <div class="three-parts">3/3</div>
+
+        <!-- Do below instead of above -->
+        <!-- <div class="row clearfix">
+            <div class="three-parts">1/3</div>
+            <div class="three-parts">2/3</div>
+            <div class="three-parts">3/3</div>
+        </div>
+        <div class="row clearfix">
+            <div class="three-parts">1/3</div>
+            <div class="three-parts">2/3</div>
+            <div class="three-parts">3/3</div>
+        </div> -->
+    </div>
+
+    <br /><br /><br /><br />
+    Reference: https://css-tricks.com/all-about-floats/
+</body>
+</html>
