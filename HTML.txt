@@ -23,3 +23,5 @@ IMP Concepts:
 - Style guide - Generally style guides are supplied by designers / UX people.
 
 - Localstorage
+
+- https://caniuse.com/# is to verify the browser compatibility of html, css and javascript features.
