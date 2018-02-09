@@ -1,6 +1,7 @@
 - The CSS Box Model
 
 - Pseudo classes
+- Pseudo-Elements
 
 - Display, visibility, inline-block
 
@@ -13,3 +14,5 @@
 - Float
 
 - Selectors
+
+- box-sizing
