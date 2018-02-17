@@ -1,11 +1,11 @@
 let:
 ====
-It's a new way/new keyword introduced to define variables with new features.
+It's a new keyword introduced to define variables with new features.
  
-Adding new features to "var" keyword will generate many backword compatability issues. So, introduced 'let' keyword.
+Adding new features to "var" keyword will generate many backward compatability issues. So, introduced 'let' keyword.
 
 Variable hoisting with var:
-
+---------------------------
 var doWork = function(){
 	return x;
 } // Return error.
@@ -26,6 +26,7 @@ var doWork = function(flag){
 } // We should get error. But, we don't get because the variable x is hoisted to top of the function.
 
 Function hoisting:
+------------------
 Function declarations are also hoisted.
 // doWork is function name / identifier
 doWork();
@@ -60,7 +61,7 @@ The rule applies for all kind of blocks like for, switch etc..
 Re-declaration not allowed within the same block.
 var doWork = function(){
     var x = 10;
-    var x = 12;
+    var x = 12; // No Error with var
     return x; 
 }
 
@@ -88,12 +89,18 @@ var doWork = function(){
     doWork();
 })();
 
+Summary of 'let' keyword:
+-------------------------
+* Scope of a variable defined with "let" is block level.So,variables are not hoisted to top.
+* Re-declaration not allowed within the same block.
 
 const:
 ======
+'const' keyword is introduced in ES6 to define constants.
+
 const LIMIT = 10;
 
-LIMIT = 20; // Give an error
+LIMIT = 20; // Give an error, can't change the constants value.
 
 Scope of const also block level.
 (function(){
@@ -105,16 +112,23 @@ Scope of const also block level.
     doWork();
 })();
 
+Summary of 'const' keyword:
+-------------------------
+* Scope of constants is block level.So,constants are not hoisted to top.
+* Re-declaration not allowed within the same block. And, we can't change the value of a constant.
+
 Destructuring:
 ==============
-Assigning values to variables in a different way.
+Destructuring is a new way to assign values to variables.
 
 let x = 2;
-let y = 3;
+let y = 3; // Assigning values in normal way.
 
 [x, y] = [y, x]; //Swaping the values
 
-The left side value is not actully array. It looks like an array. Arrays/Objects found on left side of assignment operator are not Arrays/Objects, we are dealing with individual Variables at a time.
+The left side value is not actully array. It looks like an array. Arrays/Objects found on left side of assignment operator are not Arrays/Objects, we are dealing with individual variables at a time.
+
+If we find array symbol[] / object symbol{} on the left side of assignment operator, we can understand destructuring is used in that statement.
 
 let [x, y] = [2, 3]; // Define and assign number of variables at a time.
 
@@ -122,21 +136,22 @@ let [a, b] = [1,2,3];
 let [, c, d] = [1,2,3];
 let [x, y, z] = [1,2]; // Will get z as undefined
 
+// Assign values using function
 function doWork(){
     return [1, 2];
 }
-
 let [x, y] = doWork();
 
 All the above are array destructuring. 
 
 Object destructuring:
-
+---------------------
 let {firstName: first, lastName: last} = {firstName: "John", lastName: "Papa"};
 
 let {firstName: first, lastName: last, age: age} = {firstName: "John", lastName: "Papa"};
 
 let {firstName: first, lastName: last, social: {twitter: twtr}} = {firstName: "John", lastName: "Papa", social: {twitter: "twId", fb: "fbId"}};
+Tip to remember syntax: Simply copy object to the left side and replace values with variable names.
 
 If we want to use same key name then we don't need to specify the variable name.
 
@@ -151,7 +166,7 @@ console.log(lastName);
 console.log(twitter);
 
 Destructuring with function parameters:
-
+---------------------------------------
 let hitServer = function(url, {data, cache, headers}){
     console.log(data);
     console.log(cache);
@@ -168,35 +183,36 @@ hitServer("/users", {
 Default parameters:
 ===================
 ES5:
+----
 var doWork = function(name){
-    name = name || 'Igor';
+    name = name || 'John';
     console.log(name);
 }
-doWork("John");
+doWork("Peter");
 
 ES6:
-let doWork = function(name = "Igor"){
+----
+let doWork = function(name = "John"){
     console.log(name);
 }
 doWork(); // Not passing name
-doWork("John"); // passing name
-doWork(undefined); // passing undefined
-doWork(null); // passing null
+doWork("Peter"); // passing name
+doWork(undefined); // passing undefined - name is 'John'
+doWork(null); // passing null - name is 'null'
 null and undefined are not same in Javascript.
 undefined - existed but empty
 null - not existed
 
 If we intentially pass null to function then Default parameters consider that null value.
-
 let doWork = function(a = 1, b = 2, c = 3){
     console.log(a);
     console.log(b);
     console.log(c);
 }
-
 doWork(5, undefined);
 
 Default parameters in destructuring:
+------------------------------------
 let hitServer = function(url, {data = "testData", cache, headers}){
     console.log(data);
     console.log(cache);
@@ -215,6 +231,7 @@ Rest of the parameters in a function.
 If the number of parameters are not fixed we can use rest parameters.
 
 ES5:
+----
 var doWork = function(){
     console.log(arguments);
     for(var i=0; i<=arguments.length; i++){
@@ -229,6 +246,7 @@ var doWork = function(){
 doWork("john", 1, 2, 3, 4);
 
 ES6:
+----
 doWork("john", 1, 2, 3, 4);
 
 let doWork = function(name, ...grades){
@@ -451,7 +469,6 @@ Classes:
 ========
 ES5:
 ---
-
 Prototype is a hidden property in object which helps in inheritance.
 Every JavaScript function has a prototype property and it is empty by default.
 
@@ -568,7 +585,7 @@ var person = new Person("John");
 person.name
 
 
-Inheretence:
+Inheretance:
 ------------
 class Employee extends Person{
     doWork(){
@@ -780,7 +797,6 @@ map.clear() – clears the map
 
 Set:
 ====
-
 The main methods are:
 
 new Set(iterable) – creates the set, optionally from an array of values (any iterable will do).

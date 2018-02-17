@@ -382,6 +382,9 @@ function User() {
 }
 var user = new User();
 
+Callback Functions:
+-------------------
+
 instanceof: for checking type of custom objects
 ===========
 var test = new String("abc");
