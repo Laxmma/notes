@@ -7,6 +7,7 @@ Css
 
 Jquery
     - Simple app using Jquery
+    - Use underscorejs, moment js, etc ...
 
 Bootstrap
     - Simple app using Bootstrap
@@ -14,11 +15,10 @@ Bootstrap
     - Convert the app to node module
 
 Javascript ES6 features
-    - Simple app using ES6 features
 
 Typescript
     - App using Typescript (tsc and lite-server)
-    - Build the same app using Webpack
+    - Build the app using Webpack
 
 Angular
     - App containing pocs
