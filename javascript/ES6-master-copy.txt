@@ -239,7 +239,7 @@ var doWork = function(){
     }
 
     /* console.log(typeof arguments);
-    arguments.forEach(function(val){
+    arguments.forEach(function(val){ // forEach function will fail, because arguments is not real array. It's array kind of value.
         console.log(val);
     }); */
 }
@@ -287,18 +287,13 @@ build new arrays:
 let a = [4,5,6];
 let b = [1,2,3,...a,7,8,9];
 
-Template liters:
-================
+Template literals:
+==================
 Useful to build dynamic strings easily.
 
-Substitute the values:
-let eventId = 547,userId = 256,execId = 958587,searchTerm = "borad";
+Template literals starts and end with Backtic(`). ${x} replace the value of x in template literal string.
 
-let url = "https://engage.equilar.com/event/"+eventId+"/"+userId+"/"+execId+"?term="+searchTerm;
-
-let url = `https://engage.equilar.com/event/${eventId}/${userId}/${execId}?term=${searchTerm}`;
-
-Execute the expressions:
+Substitute the values and Execute the expressions:
 let x=1,y=2;
 let template = `${x} add ${y} is ${x+y}`;
 
@@ -431,8 +426,6 @@ var p = new Person();
 
 An arrow function does not create its own this context.
 
-Example on angular controllers with var vm = this;
-
 No binding of arguments
 
 function test(a, b){
@@ -452,12 +445,11 @@ Arrow functions do not have a prototype property.
 var Foo = () => {};
 Foo.prototype
 
-
-Returning object
+Returning object:
 
 var func = (a, b) => a+b;
 
-var func = () => { foo: 1 }; 
+var func = () => { foo: 1 }; // Gives error.
 
 var func = () => ({foo: 1});
 
@@ -468,8 +460,8 @@ var func = ()
 Classes:
 ========
 ES5:
----
-Prototype is a hidden property in object which helps in inheritance.
+----
+Prototype is a hidden property of a function which helps in inheritance.
 Every JavaScript function has a prototype property and it is empty by default.
 
 function Person(first, last, age) {
@@ -483,9 +475,7 @@ Person.prototype.name = function() {
 
 var person = new Person("john", "doe", 25)
 
-http://stackoverflow.com/questions/11541436/meaning-of-prototype-in-javascript
-
-inheritance:
+inheritance using __proto__:
 let animal = {
   eats: true
 };
@@ -495,23 +485,13 @@ let rabbit = {
 
 rabbit.__proto__ = animal;
 
-
-//
-function Employe = function(){
-	this.doWork = function(){
-		return "doing work";
-	}
-}
-
-var employe = new Employe();
-emploaye.__proto__ = person;
-
 ES6:
 ----
 class Employee {
     doWork(){
         return "done!";
     }
+
     getName(){
         return "John";
     }
@@ -521,7 +501,7 @@ let emp = new Employee();
 
 emp.doWork();
 
-emp.prototype.doWork(); //This is happening in backword
+emp.prototype.doWork(); //classes use prototype property is used in the background.
 
 Constructor: function in class which is invoked automatically while creating class
 
