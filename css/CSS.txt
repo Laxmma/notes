@@ -16,3 +16,5 @@
 - Selectors
 
 - box-sizing
+
+- !important - to override some property
