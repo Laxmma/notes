@@ -1051,5 +1051,55 @@ webpack - build and exit.
 
 webpack --watch  - build and keep on checking for changes.
 
+Default Export:
+---------------
+An ES6 module can pick a default export, the main exported value. Default exports are especially easy to import.
+
+The following ECMAScript 6 module is a single function:
+
+//------ myFunc.js ------
+export default function () {} // no semicolon!
+
+//------ main1.js ------
+import myFunc from 'myFunc';
+myFunc();
 
 
+An ECMAScript 6 module whose default export is a class looks as follows:
+//------ MyClass.js ------
+export default class {} // no semicolon!
+
+//------ main2.js ------
+import MyClass from 'MyClass';
+const inst = new MyClass();
+
+Above default exports have labels. We can default export direct values also.
+
+export default 'abc';
+export default foo();
+export default /^xyz$/;
+export default 5 * 7;
+export default { no: false, yes: true };
+
+Imports and exports must be at the top level.
+// No conditional Imports
+if (Math.random()) {
+    import 'foo'; // SyntaxError
+}
+
+// You can’t even nest `import` and `export`
+// inside a simple block:
+{
+    import 'foo'; // SyntaxError
+}
+
+Imports are hoisted: Therefore, it doesn’t matter where you mention them in a module and the following code works without any problems:
+
+foo();
+import { foo } from 'my_module';
+
+Import all: 
+import * as foo from 'foo';
+foo.bar();
+
+import * as lib from './lib';
