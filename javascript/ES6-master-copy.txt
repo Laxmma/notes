@@ -1010,14 +1010,46 @@ while(!next.done){
 
 Modules:
 ========
-
 Good authors divide their books into chapters and sections; good programmers divide their programs into modules.
 
-Browsers are not yet supporting modulets feature in ES6. So, we use module loaders like SystemJs, requireJs etc..
+In JavaScript each file is a module and all objects defined in the file belong to that module. 
 
-A module loader is a polyfill to support modules in un supported browsers.
+One module export objects / constants / functions etc... using 'export' keyword, another module import using 'import' keywodrd.
 
-http://exploringjs.com/es6/ch_modules.html
+//------ lib.js ------
+export const sqrt = Math.sqrt;
+export function square(x) {
+    return x * x;
+}
+export function diag(x, y) {
+    return sqrt(square(x) + square(y));
+}
 
-In JavaScript each file is a module and all objects defined in the file belong to that module. The module declares some objects to be public by marking them with the export key word. Other JavaScript modules use import statements to access public objects from other modules.
+//------ main.js ------
+import { square, diag } from 'lib';
+console.log(square(11)); // 121
+console.log(diag(4, 3)); // 5
+
+You can also import the complete module:
+
+//------ main.js ------
+import * as lib from 'lib';
+console.log(lib.square(11)); // 121
+console.log(lib.diag(4, 3)); // 5
+
+Browsers are not yet supporting modulets feature in ES6. So, we use module loaders like SystemJs, requireJs etc.. A module loader is a polyfill to support modules in un supported browsers.
+
+Webpack is module bundler, which convert ES6 modules into ES5 modules.
+
+https://medium.com/@svinkle/getting-started-with-webpack-and-es6-modules-c465d053d988
+
+Code Repo: https://github.com/nagarjun-immadi/getting-started-with-webpack-and-es6-modules-the-demo
+
+webpack commands:
+----------------- 
+webpack - build and exit.
+
+webpack --watch  - build and keep on checking for changes.
+
+
 

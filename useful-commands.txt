@@ -1,0 +1,49 @@
+NPM:
+===
+npm init => to initialize npm repo.
+
+npm init -y => to skip questions on initialization and directly create package.json
+
+npm install => to install all the dependencies in npm repo.
+
+npm install dependencyName -g => to install dependency globally.
+
+npm install dependencyName => install dependency without updating package.json
+
+npm install dependencyName --save => install dependency and update 'dependencies' of package.json
+
+npm install dependencyName --save-dev => install dependency and update 'devDependencies' of package.json  
+
+Webpack:
+========
+Webpack =>  build and exit.
+
+webpack --watch  => build and keep on checking for changes.
+
+webpack -d --watch => build and keep on checking for changes in debug mode.
+
+Git:
+====
+git clone => clone git repo
+
+git status => check for any changes
+
+git add -A => stage all changes
+
+git commit -m 'msg' => commit with msg
+
+git push => push changes to remote.
+
+git pull => take update from remote.
+
+git checkout branchName => to checkout specific branch.
+
+git stash => stash all changes
+
+git stash list => to check all the stashes available in repo
+
+git stash save customMessage => stash changes with custom customMessage
+
+git stash apply stash@{2} => apply stash based on stash number
+
+git stash drop stash@{0} => delete stash.
