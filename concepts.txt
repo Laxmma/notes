@@ -11,13 +11,13 @@ Jquery
 
 Bootstrap
     - Simple app using Bootstrap
+	- Dependency management with npm and bower. Convert the app to node module.
     - Css pre-processors SASS / LESS
-    - Convert the app to node module
 
 Javascript ES6 features
 
 Typescript
-    - App using Typescript (tsc and lite-server)
+    - Simple app using Typescript (tsc and lite-server)
     - Build the app using Webpack
 
 Angular
