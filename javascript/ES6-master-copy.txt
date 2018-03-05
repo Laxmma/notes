@@ -349,7 +349,8 @@ smartPhones.map(smartPhone=>smartPhone.price);
 
 Every function define it's own this.
 
-Different shades of this
+Different shades of this:
+-------------------------
 In Functions,
 function printThis(){
     console.log(this);
@@ -536,6 +537,7 @@ class Employee {
     }
 }
 
+let emp = new Employee("john");
 emp.name
 
 class Employee {
@@ -552,7 +554,7 @@ class Employee {
 
 class Person {
     constructor(name){
-        this.name = name;
+        this._name = name;
     }
 	get name(){
 		return this._name;
@@ -563,7 +565,6 @@ class Person {
 }
 var person = new Person("John");
 person.name
-
 
 Inheretance:
 ------------
@@ -591,7 +592,7 @@ Super:
 ------
 class Person {
     constructor(name){
-        this.name = name;
+        this._name = name;
     }
 	get name(){
 		return this._name;
@@ -667,7 +668,6 @@ class Employee extends Person{
 
 var emp = new Employee("John");
 emp.doWork();
-
 
 Map:
 ====
@@ -1020,14 +1020,4 @@ A module loader is a polyfill to support modules in un supported browsers.
 http://exploringjs.com/es6/ch_modules.html
 
 In JavaScript each file is a module and all objects defined in the file belong to that module. The module declares some objects to be public by marking them with the export key word. Other JavaScript modules use import statements to access public objects from other modules.
-
-
-Promises:
-=========
-
-https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
-
-.then() always returns a new promise, it’s possible to chain promises.
-
-https://www.sitepoint.com/overview-javascript-promises/
 
