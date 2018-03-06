@@ -602,7 +602,7 @@ class Person {
     }
 }
 
-class Employee extends Person{
+class Employee extends Person{    
     // Without constructor works
     // With empty constructor doesn't work
     // With super(), without passsing name doesn't work

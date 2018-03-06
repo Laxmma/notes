@@ -28,7 +28,7 @@ git clone => clone git repo
 
 git status => check for any changes
 
-git add -A => stage all changes
+git add -A => stage all changes     
 
 git commit -m 'msg' => commit with msg
 
