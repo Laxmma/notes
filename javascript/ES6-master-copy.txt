@@ -115,7 +115,7 @@ Scope of const also block level.
 })();
 
 Summary of 'const' keyword:
--------------------------
+---------------------------
 * Scope of constants is block level.So,constants are not hoisted to top.
 * Re-declaration not allowed within the same block. And, we can't change the value of a constant.
 
@@ -125,6 +125,8 @@ Destructuring is a new way to assign values to variables.
 
 let x = 2;
 let y = 3; // Assigning values in normal way.
+
+let [x, y] = [2, 3];
 
 [x, y] = [y, x]; //Swaping the values
 
@@ -304,6 +306,8 @@ let html = `<div>
 	<span>test</span>
 </div>`;
 
+` - Back tick.
+
 Arrow Functions:
 ================
 Two benifits
@@ -449,10 +453,10 @@ var Foo = () => {};
 Foo.prototype
 
 Returning object:
-
+-----------------
 var func = (a, b) => a+b;
 
-var func = () => { foo: 1 }; // Gives error.
+var func = () => { foo: 1 }; // Gives undefined.
 
 var func = () => ({foo: 1});
 

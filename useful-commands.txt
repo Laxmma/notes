@@ -47,3 +47,7 @@ git stash save customMessage => stash changes with custom customMessage
 git stash apply stash@{2} => apply stash based on stash number
 
 git stash drop stash@{0} => delete stash.
+
+VS Code:
+========
+Alt + z - Toggle word wrap.
