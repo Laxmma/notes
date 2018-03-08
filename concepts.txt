@@ -7,7 +7,6 @@ Css
 
 Jquery
     - Simple app using Jquery
-    - Use underscorejs, moment js, etc ...
 
 Bootstrap
     - Simple app using Bootstrap
