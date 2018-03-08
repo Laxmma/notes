@@ -764,7 +764,7 @@ for(let entry of recipeMap) { // the same as of recipeMap.entries()
   console.log(entry);
 }
 
-Note about syntax diff between Object.entries(obj) and recipeMap.keys();
+Note about syntax diff between Object.entries(obj) and recipeMap.entries();
 
 The iteration goes in the same order as the values were inserted. Map guarantees that unlike a regular Object.
 
@@ -812,7 +812,7 @@ for(let user of set) {
   console.log(user.name); // John (then Pete and Mary)
 }
 
-To achieve uniqueness to array it's performance costly process. We do it generally with .indexOf() methods.
+To achieve uniqueness to array, it's a performance costly process. We do it generally with .indexOf() methods.
 
 Set handles it by default.
 
@@ -1105,3 +1105,12 @@ import * as foo from 'foo';
 foo.bar();
 
 import * as lib from './lib';
+
+
+Sites to Refer:
+===============
+http://javascript.info/
+
+http://exploringjs.com/es6/
+
+https://ponyfoo.com/articles/tagged/es6-in-depth
