@@ -1,3 +1,5 @@
+ES6 / ECMA Script 2015.
+
 let:
 ====
 It's a new keyword introduced to define variables with new features.
@@ -77,7 +79,7 @@ var doWork = function(){
     return x; 
 }
 
-** This re-declaration rule applies only for only that block **
+** This re-declaration rule applies in only that block **
 
 (function(){
     let x = 10;
