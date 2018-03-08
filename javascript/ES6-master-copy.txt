@@ -830,36 +830,26 @@ set.keys() – returns an iterable object for values,
 set.values() – same as set.keys, for compatibility with Map,
 set.entries() – returns an iterable object for entries [value, value], exists for compatibility with Map.
 
-WeakMap and WeakSet:
-====================
-let john = { name: "John" };
+WeakMap:
+=======
+We can think of WeakMap as a subset of Map. There are a few limitations on WeakMap.
 
-// the object can be accessed, john is the reference to it
+The biggest limitation is, WeakMap is not iterable. So, no .entries(), .keys(), .values(), .forEach() and no .clear() methods.
 
-// overwrite the reference
-john = null;
+Another limitation is WeakMap accepts only objects as keys. 
 
-// the object will be removed from memory
+var map = new WeakMap()
+map.set(1, 2)
+// TypeError: 1 is not an object!
+map.set(Symbol(), 2)
+// TypeError: Invalid value used as weak map key
 
-WeakMap/WeakSet does not prevent the object removal from the memory.
+map.set({}, 2) // No error
 
-let john = { name: "John" };
 
-let weakMap = new WeakMap();
-weakMap.set(john, "...");
 
-john = null; // overwrite the reference
-
-// john is removed from memory!
-
-WeakMap does not support methods keys(), values(), entries(), we can not iterate over it. So there’s really no way to receive all keys or values from it.
-
-WeakMap has only the following methods:
-
-weakMap.get(key)
-weakMap.set(key, value)
-weakMap.delete(key, value)
-weakMap.has(key)
+WeakSet:
+========
 
 Object changes:
 ===============
