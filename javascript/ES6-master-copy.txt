@@ -854,8 +854,23 @@ map.set(Symbol(), 2)
 
 map.set({}, 2) // No error
 
+WeakMap holds references to its keys weakly, meaning that if there are no other references to one of its keys, the object is subject to garbage collection.
+
+// Need to know the real time usecases.
+
 WeakSet:
 ========
+We can think of WeakSet as a subset of Set.
+
+Can’t iterate over WeakSet. Its values must be unique object references. If nothing else is referencing a value found in a WeakSet, it’ll be subject to garbage collection.
+
+Much like in WeakMap, you can only .add, .has, and .delete values from a WeakSet. And just like in Set, there’s no .get.
+
+var set = new WeakSet()
+set.add({})
+set.add(new Date())
+
+// Need to know the real time usecases.
 
 Object changes:
 ===============
@@ -911,7 +926,7 @@ We can write simple expressions in [].
 Array changes and Comprehensions:
 =================================
 find and findIndex:
-------------------
+-------------------
 We use indexOf to search for an element in an array.
 
 for conditional based search we use for loop.
@@ -954,17 +969,6 @@ var firstEntry = entries.next().value;
 var keys = names.keys();
 
 entries[Symbol.iterator]
-
-Comprehensions:
----------------
-Altername for array.map(function(){});
-
-var arr = [for(i of [1,2,3]) i*i]; //[1,4,9]
-
-var arr = [for(i of [1,2,3]) if(i<3) i*i]; //[1,4] //Filter the data
-
-No support in chrome yet,
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Array_comprehensions
 
 Symbols:
 ========
