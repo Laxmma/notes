@@ -572,6 +572,8 @@ class Person {
 var person = new Person("John");
 person.name
 
+person.name = "Doe"; //Setting property
+
 Inheretance:
 ------------
 class Employee extends Person{
@@ -851,8 +853,6 @@ map.set(Symbol(), 2)
 // TypeError: Invalid value used as weak map key
 
 map.set({}, 2) // No error
-
-
 
 WeakSet:
 ========
