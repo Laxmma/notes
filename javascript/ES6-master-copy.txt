@@ -677,6 +677,124 @@ class Employee extends Person{
 var emp = new Employee("John");
 emp.doWork();
 
+Modules:
+========
+Good authors divide their books into chapters and sections; good programmers divide their programs into modules.
+
+In JavaScript each file is a module and all objects defined in the file belong to that module. 
+
+One module export objects / constants / functions etc... using 'export' keyword, another module import using 'import' keywodrd.
+
+//------ lib.js ------
+export const sqrt = Math.sqrt;
+export function square(x) {
+    return x * x;
+}
+export function diag(x, y) {
+    return sqrt(square(x) + square(y));
+}
+
+//------ main.js ------
+import { square, diag } from 'lib';
+console.log(square(11)); // 121
+console.log(diag(4, 3)); // 5
+
+You can also import the complete module:
+
+//------ main.js ------
+import * as lib from 'lib';
+console.log(lib.square(11)); // 121
+console.log(lib.diag(4, 3)); // 5
+
+Browsers are not yet supporting modules feature in ES6. So, we use module loaders like SystemJs, requireJs etc.. A module loader is a polyfill to support modules in un supported browsers.
+
+Webpack is module bundler, which convert ES6 modules into ES5 modules.
+
+https://medium.com/@svinkle/getting-started-with-webpack-and-es6-modules-c465d053d988
+
+Code Repo: https://github.com/nagarjun-immadi/getting-started-with-webpack-and-es6-modules-the-demo
+
+webpack commands:
+----------------- 
+webpack - build and exit.
+
+webpack --watch  - build and keep on checking for changes.
+
+Default Export:
+---------------
+An ES6 module can pick a default export, the main exported value. Default exports are especially easy to import.
+
+The following ECMAScript 6 module is a single function:
+
+//------ myFunc.js ------
+export default function () {} // no semicolon!
+
+//------ main1.js ------
+import myFunc from 'myFunc';
+myFunc();
+
+
+An ECMAScript 6 module whose default export is a class looks as follows:
+//------ MyClass.js ------
+export default class {} // no semicolon!
+
+//------ main2.js ------
+import MyClass from 'MyClass';
+const inst = new MyClass();
+
+Above default exports have labels. We can default export direct values also.
+
+export default 'abc';
+export default foo();
+export default /^xyz$/;
+export default 5 * 7;
+export default { no: false, yes: true };
+
+Imports and exports must be at the top level.
+// No conditional Imports
+if (Math.random()) {
+    import 'foo'; // SyntaxError
+}
+
+// You can’t even nest `import` and `export`
+// inside a simple block:
+{
+    import 'foo'; // SyntaxError
+}
+
+Imports are hoisted: Therefore, it doesn’t matter where you mention them in a module and the following code works without any problems:
+
+foo();
+import { foo } from 'my_module';
+
+Import all: 
+import * as foo from 'foo';
+foo.bar();
+
+import * as lib from './lib';
+
+Symbols:
+========
+The data type symbol is a primitive data type.
+
+Iterators and Generators:
+=========================
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators
+
+function* makeIterator(array) {
+    yield* array;
+}
+
+var obj = {fname: "John", lname: "Doe"};
+
+function* objGenerator(objParam){
+	yield* Object.values(objParam);
+};
+
+var objIterator = objGenerator(obj);
+
+obj[Symbol.iterator] = objIterator;
+
 Map:
 ====
 Currently we are using Objects and arrays for data collections.
@@ -872,6 +990,22 @@ set.add(new Date())
 
 // Need to know the real time usecases.
 
+Array iterator example:
+-----------------------
+let numbers = [1,2,3,4];
+numbers[Symbol.iterator]
+
+numbers[Symbol.iterator]().next(()
+Object {value: 1, done: false}
+
+// Manual iterator
+let iterator = numbers.values(); // don't work in chrome
+let next = iterator.next();
+while(!next.done){
+    sum += next.value;
+    next = iterator.next(); 
+}
+
 Object changes:
 ===============
 object.assign() - to extend one object.
@@ -969,141 +1103,6 @@ var firstEntry = entries.next().value;
 var keys = names.keys();
 
 entries[Symbol.iterator]
-
-Symbols:
-========
-The data type symbol is a primitive data type.
-
-Iterators and Generators:
-=========================
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators
-
-function* makeIterator(array) {
-    yield* array;
-}
-
-var obj = {fname: "John", lname: "Doe"};
-
-function* objGenerator(objParam){
-	yield* Object.values(objParam);
-};
-
-var objIterator = objGenerator(obj);
-
-obj[Symbol.iterator] = objIterator;
-
-Array iterator example:
------------------------
-let numbers = [1,2,3,4];
-numbers[Symbol.iterator]
-
-numbers[Symbol.iterator]().next(()
-Object {value: 1, done: false}
-
-// Manual iterator
-let iterator = numbers.values(); // don't work in chrome
-let next = iterator.next();
-while(!next.done){
-    sum += next.value;
-    next = iterator.next(); 
-}
-
-Modules:
-========
-Good authors divide their books into chapters and sections; good programmers divide their programs into modules.
-
-In JavaScript each file is a module and all objects defined in the file belong to that module. 
-
-One module export objects / constants / functions etc... using 'export' keyword, another module import using 'import' keywodrd.
-
-//------ lib.js ------
-export const sqrt = Math.sqrt;
-export function square(x) {
-    return x * x;
-}
-export function diag(x, y) {
-    return sqrt(square(x) + square(y));
-}
-
-//------ main.js ------
-import { square, diag } from 'lib';
-console.log(square(11)); // 121
-console.log(diag(4, 3)); // 5
-
-You can also import the complete module:
-
-//------ main.js ------
-import * as lib from 'lib';
-console.log(lib.square(11)); // 121
-console.log(lib.diag(4, 3)); // 5
-
-Browsers are not yet supporting modulets feature in ES6. So, we use module loaders like SystemJs, requireJs etc.. A module loader is a polyfill to support modules in un supported browsers.
-
-Webpack is module bundler, which convert ES6 modules into ES5 modules.
-
-https://medium.com/@svinkle/getting-started-with-webpack-and-es6-modules-c465d053d988
-
-Code Repo: https://github.com/nagarjun-immadi/getting-started-with-webpack-and-es6-modules-the-demo
-
-webpack commands:
------------------ 
-webpack - build and exit.
-
-webpack --watch  - build and keep on checking for changes.
-
-Default Export:
----------------
-An ES6 module can pick a default export, the main exported value. Default exports are especially easy to import.
-
-The following ECMAScript 6 module is a single function:
-
-//------ myFunc.js ------
-export default function () {} // no semicolon!
-
-//------ main1.js ------
-import myFunc from 'myFunc';
-myFunc();
-
-
-An ECMAScript 6 module whose default export is a class looks as follows:
-//------ MyClass.js ------
-export default class {} // no semicolon!
-
-//------ main2.js ------
-import MyClass from 'MyClass';
-const inst = new MyClass();
-
-Above default exports have labels. We can default export direct values also.
-
-export default 'abc';
-export default foo();
-export default /^xyz$/;
-export default 5 * 7;
-export default { no: false, yes: true };
-
-Imports and exports must be at the top level.
-// No conditional Imports
-if (Math.random()) {
-    import 'foo'; // SyntaxError
-}
-
-// You can’t even nest `import` and `export`
-// inside a simple block:
-{
-    import 'foo'; // SyntaxError
-}
-
-Imports are hoisted: Therefore, it doesn’t matter where you mention them in a module and the following code works without any problems:
-
-foo();
-import { foo } from 'my_module';
-
-Import all: 
-import * as foo from 'foo';
-foo.bar();
-
-import * as lib from './lib';
-
 
 Sites to Refer:
 ===============
