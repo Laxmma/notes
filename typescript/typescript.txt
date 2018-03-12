@@ -1,0 +1,76 @@
+TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
+
+Installation:
+=============
+npm install -g typescript
+
+tsc --version
+
+tsc stands for "TypeScript Compiler".
+
+tsc helloworld.ts => helloworld.ts compile to helloworld.js
+
+script: tsc 1_helloworld.ts
+
+Data Types:
+===========
+JavaScript is loosely typed language. But, typescript contains datatypes, we need to specify datatype of a variable while defining.
+
+let isDone: boolean = false;
+
+'isDone' is variable name, 'boolean' is datatype.
+
+Boolean:
+--------
+boolean datatype holds true/false.
+
+let isLoading: boolean = true;
+
+Number:
+-------
+As like JavaScript, in TypeScript also all kinds of numbers comes under 'number' data type.
+
+let decimalNum: number = 6;
+let floatNum: number = 6.66;
+let hexNum: number = 0xf00d;
+let binaryNum: number = 0b1010;
+let octalNum: number = 0o744;
+
+String:
+-------
+'string' data type holds text data.
+
+let color: string = "blue"; \\ Double quotes 
+color = 'red'; \\ Single quotes
+color = `green`; \\ Back tick
+
+let fullName: string = `John Doe`;
+let sentence: string = `Hello, my name is ${ fullName }.
+
+Array:
+------
+let list: number[] = [1, 2, 3]; // Numerical array
+
+let list: Array<number> = [1, 2, 3];
+
+Tuple:
+------
+Tuple is a datatype used to express datatypes of array elements. 
+
+// Declare a tuple type
+let x: [string, number]; // 0th indexed value should be string, 1 indexed value should be number.
+
+// Initialize it
+x = ["hello", 10]; // OK
+
+// Initialize it incorrectly
+x = [10, "hello"]; // Error
+
+x[1].substr(1) // Retuns error in compilation. So, runtime errors will be prevented.
+
+x[3] = "world"; // 3rd index is out of the known indices. So, the value should be 'string | number' (union data type). 
+
+x[6] = true; // Error, 'boolean' isn't 'string | number'
+
+Enum:
+-----
