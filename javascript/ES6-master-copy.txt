@@ -775,25 +775,179 @@ import * as lib from './lib';
 
 Symbols:
 ========
-The data type symbol is a primitive data type.
+Symbol is a primitive data type.
 
-Iterators and Generators:
-=========================
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators
+Object property keys may be either of string type, or of symbol type. Not numbers, not booleans, only strings or symbols.
+Ex: iterator symbol on arrays and maps etc...
 
-function* makeIterator(array) {
-    yield* array;
-}
+“Symbol” value represents a unique identifier.
 
-var obj = {fname: "John", lname: "Doe"};
+// id is a new symbol
+let id = Symbol();
 
-function* objGenerator(objParam){
-	yield* Object.values(objParam);
+We can also give symbol a description / name:
+// userId is a symbol with the description "id"
+let userId = Symbol("id");
+
+Symbols are guaranteed to be unique. Even if we create many symbols with the same description, they are different values. The description is just a label that doesn’t affect anything.
+
+Below two symbols are not equal:
+let id1 = Symbol("id");
+let id2 = Symbol("id");
+
+id1 == id2 // false
+
+Symbols don’t auto-convert to a string:
+let id = Symbol("id");
+alert(id); // TypeError: Cannot convert a Symbol value to a string
+
+let id = Symbol("id");
+alert(id.toString()); // Symbol(id), now it works
+
+If we want to use a symbol in an object literal, we need square brackets.
+let id = Symbol("id");
+
+let user = {
+  name: "John",
+  [id]: 123 // not just "id: 123"
 };
 
-var objIterator = objGenerator(obj);
+Make an object symblo property readonly:
+let id = Symbol("id");
 
-obj[Symbol.iterator] = objIterator;
+let user = {
+  name: "John",
+  [id]: 123 // not just "id: 123"
+};
+
+id = null; // By making id reference as null, we can't access the id symbol in the user object.
+
+Symbols are skipped by for…in loop.
+let id = Symbol("id");
+let user = {
+  name: "John",
+  age: 30,
+  [id]: 123
+};
+
+for (let key in user) {
+    console.log(key);
+}
+
+Object.keys(user); // Object.keys also skips symbol keys
+
+Object.assign() copies symbols also.
+let id = Symbol("id");
+let user = {
+  [id]: 123
+};
+let clone = Object.assign({}, user);
+console.log( clone[id] ); // 123
+
+Global symbols:
+---------------
+Some times we need to use same symbol throughout the application. So, we can ceate gloal symbols and use it.
+
+To achieve that, there exists a global symbol registry. We can create symbols in it and access them later, and it guarantees that repeated accesses by the same name return exactly the same symbol.
+
+Symbols inside the registry are called global symbols.
+
+Using Symbol.for(key), we can create and access global symbol with 'key' in registry.
+
+Symbol.for(key) checks the global registry, and if there’s a symbol described as key, then returns it, otherwise creates a new symbol Symbol(key) and stores it in the registry by the given key.
+
+// read from the global registry
+let id = Symbol.for("id"); // if the symbol did not exist, it is created
+
+// read it again
+let idAgain = Symbol.for("id");
+
+// the same symbol
+console.log( id === idAgain ); // true
+
+Symbol.keyFor(sym): Takes symbol and return key for that symbol.
+------------------
+let sym = Symbol.for("name");
+let sym2 = Symbol.for("id");
+
+// get name from symbol
+console.log( Symbol.keyFor(sym) ); // name
+console.log( Symbol.keyFor(sym2) ); // id
+
+Symbol.keyFor works for only gloal symbols not for normal symbols. For normal symbols it will return undefined.
+
+System symbols:
+---------------
+System symbols are used by javascript internally. Below are examples.
+- Symbol.iterator
+- Symbol.hasInstance
+- Symbol.isConcatSpreadable
+- Symbol.toPrimitive
+- etc ....
+
+Iterators:
+==========
+Iteration is a concept that allows to make any object useable in a for..of loop.
+
+Arrays, Strings, Maps, Sets and many other built-in objects are iterables. 
+
+If an entity contains Symbol.iterator then it can be an iterable. Arrays, Strings etc.. contains Symbol.iterator function. 
+
+var str = new String('test');
+for(var char of str){
+    console.log(char);
+}
+
+Objects are not iterables. Symbol.iterator function not available on objects.
+
+Symbol.iterator method:
+-----------------------
+We can easily grasp the concept of iterables by making one of our own.
+
+let user = {
+  firstname: 'John',
+  lastname: 'Doe',
+  age: 25
+};
+
+Let's take the user object and implement a custom iterator method to return all the values.
+
+So, we need to add Symbol.iterator property for user object. user[Symbol.iterator] method should be like below.
+1. When for..of starts, it calls user[Symbol.iterator] method.
+2. The method must return an iterator – an object with the method next.
+3. When for..of wants the next value, it calls next() on that object.
+4. The result of next() must have the form {done: Boolean, value: any}, where done=true means that the iteration is finished, otherwise value must be the new value.
+
+let user = {
+  firstname: 'John',
+  lastname: 'Doe',
+  age: 25
+};
+
+// 1. call to for..of initially calls this
+user[Symbol.iterator] = function() {
+  let keys = Object.keys(this);
+  // 2. ...it returns the iterator:
+  return {
+    current: 0,
+    last: keys.length - 1,
+
+    // 3. next() is called on each iteration by the for..of loop
+    next: function() {
+      // 4. it should return the value as an object {done:.., value :...}
+      if (this.current <= this.last) {
+        return { done: false, value: user[keys[this.current++]] };
+      } else {
+        return { done: true };
+      }
+    }
+  };
+};
+
+// now it works!
+for (let val of user) {
+  console.log(val);
+}
 
 Map:
 ====
