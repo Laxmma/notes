@@ -10,7 +10,7 @@ tsc stands for "TypeScript Compiler".
 
 tsc helloworld.ts => helloworld.ts compile to helloworld.js
 
-script: tsc 1_helloworld.ts
+Scripts: 1helloworld
 
 Data Types:
 ===========
@@ -93,7 +93,7 @@ Let's give some names to the levels and handle the same code using enums.
 
 enum level {one = 1000, two = 2000, three = 3000, four = 4000, five = 5000};
 
-script: tsc 2_enum.ts
+Scripts: 2enum
 
 enum level {one = 1000, two, three, four, five};
 If we initialize one with 1000, two will become 1001, three will become 1002 etc..
@@ -103,4 +103,16 @@ If we don't initialize one will become 0, two will become 1, three will become 2
 
 We can know the name of enum with value.
 level[2000]; // Return two
+
+Any:
+----
+If we don't know type of variable at the time of writing the application we need to opt for 'any' kind. Sometimes we get data from user/third-party libraries.
+
+let notSure: any = 4;
+notSure = "maybe a string instead";
+notSure = false; // okay, definitely a boolean
+
+let list: any[] = [1, true, "free"];
+list[1] = 100;
+
 
