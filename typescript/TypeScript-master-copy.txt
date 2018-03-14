@@ -518,4 +518,24 @@ let tom: Animal = new Horse("Tommy the Palomino");
 sam.move();
 tom.move(34);
 
+Public, private, and protected modifiers:
+-----------------------------------------
+By default all class members are public. We don’t need to mention it. We can still mark a member public explicitly.
+
+class Animal {
+    public name: string;
+    public constructor(theName: string) { this.name = theName; }
+    public move(distanceInMeters: number) {
+        console.log(`${this.name} moved ${distanceInMeters}m.`);
+    }
+}
+
+When a member is marked private, it cannot be accessed from outside of its containing class.
+
+class Animal {
+    private name: string;
+    constructor(theName: string) { this.name = theName; }
+}
+
+new Animal("Cat").name; // Error: 'name' is private;
 
