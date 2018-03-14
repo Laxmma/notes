@@ -10,7 +10,12 @@ tsc stands for "TypeScript Compiler".
 
 tsc helloworld.ts => helloworld.ts compile to helloworld.js
 
-Scripts: 1helloworld
+function Person() {
+    this.name = 'John Doe';
+    this.age = 25;
+}
+
+let personObj = new Person();
 
 Data Types:
 ===========
@@ -92,8 +97,24 @@ if(score > 1000) {
 Let's give some names to the levels and handle the same code using enums. 
 
 enum level {one = 1000, two = 2000, three = 3000, four = 4000, five = 5000};
+let score = 2500;
+if(score <= level.one) {
+    console.log('Shift to power mode');
+} else if(score <= level.two) {
+    console.log('Able to purchase sports car');
+} else if(score <= level.three) {
+    console.log('Able to purchase racing car'); 
+} else if(score <= level.four){
+    console.log('Able to purchase super car');
+} else if(score <= level.five){
+    console.log('Able to purchase flying car');
+}
+console.log(level[2000]);
+enum newLevels {one = 1000, two, three, four, five};
+console.log(newLevels);
+enum latestLevels {one, two, three, four, five};
+console.log(latestLevels);
 
-Scripts: 2enum
 
 enum level {one = 1000, two, three, four, five};
 If we initialize one with 1000, two will become 1001, three will become 1002 etc..
@@ -236,4 +257,265 @@ let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
 let search = { food: "rich", ...defaults };
 
 While spreading we will loose the methods in the spreaded Object.
+
+Interfaces:
+===========
+Interfaces define the shape of a value. TypeScript always check whether the value is in specified format or not. This is called type-checking / duck typing / structural sub typing.
+
+function printLabel(labelledObj: { label: string }) {
+    console.log(labelledObj.label);
+}
+
+let myObj = {size: 10, label: "Size 10 Object"};
+printLabel(myObj);
+
+Type checker checks for label in myObj. If it is not found, compiler will return error.
+
+interface LabelledValue {
+    label: string;
+}
+
+function printLabel(labelledObj: LabelledValue) {
+    console.log(labelledObj.label);
+}
+
+let myObj = {size: 10, label: "Size 10 Object"};
+printLabel(myObj);
+
+myObj contains 'size' property also. But, type checker checks for all the properties specified in the interface are available or not.
+
+Optional Properties:
+--------------------
+Not all properties of an interface may be required. Some exist under certain conditions or may not be there at all.
+
+Optional properties denoted by a ? at the end of the property name in the declaration.
+
+interface SquareConfig {
+    color?: string;
+    width?: number;
+}
+
+function createSquare(config: SquareConfig): {color: string; area: number} {
+    let newSquare = {color: "white", area: 100};
+    if (config.color) {
+        newSquare.color = config.color;
+    }
+    if (config.width) {
+        newSquare.area = config.width * config.width;
+    }
+    return newSquare;
+}
+
+let mySquare = createSquare({color: "black"});
+
+Readonly properties:
+--------------------
+Some properties should only be modifiable when an object is first created. You can specify this by putting readonly before the name of the property.
+
+interface Point {
+    readonly x: number;
+    readonly y: number;
+}
+
+let p1: Point = { x: 10, y: 20 };
+p1.x = 5; // error!
+
+TypeScript comes with a ReadonlyArray<T> type that is the same as Array<T> with all mutating methods removed, so you can make sure you don’t change your arrays after creation:
+
+let a: number[] = [1, 2, 3, 4];
+let ro: ReadonlyArray<number> = a;
+ro[0] = 12; // error!
+ro.push(5); // error!
+ro.length = 100; // error!
+a = ro; // error! - can't assign ReadonlyArray to normal array. But, type assertion works.
+
+a = ro as number[];
+
+readonly vs const:
+------------------
+Variables use const whereas properties use readonly.
+
+Function Types:
+---------------
+Interfaces can be used to describing function types.
+
+To describe a function type with an interface, we give the interface a call signature. This is like a function declaration with only the parameter list and return type given. Each parameter in the parameter list requires both name and type.
+
+interface SearchFunc {
+    (source: string, subString: string): boolean;
+}
+
+let mySearch: SearchFunc;
+mySearch = function(source: string, subString: string) {
+    let result = source.search(subString);
+    return result > -1;
+}
+
+For function types to correctly type-check, the names of the parameters do not need to match. We could have, for example, written the above example like this:
+
+let mySearch: SearchFunc;
+mySearch = function(src: string, sub: string): boolean {
+    let result = src.search(sub);
+    return result > -1;
+}
+
+Indexable Types:
+----------------
+interface StringArray {
+    [index: number]: string;
+}
+
+let myArray: StringArray;
+myArray = ["Bob", "Fred"];
+
+we can make index signatures readonly in order to prevent assignment to their indices:
+
+interface ReadonlyStringArray {
+    readonly [index: number]: string;
+}
+let myArray: ReadonlyStringArray = ["Alice", "Bob"];
+myArray[2] = "Mallory"; // error! we can’t set myArray[2] because the index signature is readonly.
+
+Class Types:
+------------
+interface ClockInterface {
+    currentTime: Date;
+}
+
+class Clock implements ClockInterface {
+    currentTime: Date;
+    constructor(h: number, m: number) { }
+}
+
+we can also describe methods in an interface that are implemented in the class.
+
+interface ClockInterface {
+    currentTime: Date;
+    setTime(d: Date);
+}
+
+class Clock implements ClockInterface {
+    currentTime: Date;
+    setTime(d: Date) {
+        this.currentTime = d;
+    }
+    constructor(h: number, m: number) { }
+}
+
+Interfaces describe the public side of the class, rather than both the public and private side. This prohibits exposing private side.
+
+Extending Interfaces:
+---------------------
+Like classes, interfaces can extend each other. This allows you to copy the members of one interface into another, which gives you more flexibility in how you separate your interfaces into reusable components.
+
+interface Shape {
+    color: string;
+}
+
+interface Square extends Shape {
+    sideLength: number;
+}
+
+let square = <Square>{};
+square.color = "blue";
+square.sideLength = 10;
+
+An interface can extend multiple interfaces, creating a combination of all of the interfaces.
+
+interface Shape {
+    color: string;
+}
+
+interface PenStroke {
+    penWidth: number;
+}
+
+interface Square extends Shape, PenStroke {
+    sideLength: number;
+}
+
+let square = <Square>{};
+square.color = "blue";
+square.sideLength = 10;
+square.penWidth = 5.0;
+
+Interfaces Extending Classes:
+-----------------------------
+When an interface type extends a class type it inherits the members of the class but not their implementations.
+
+Interfaces inherit even the private and protected members of a base class.
+
+class Control {
+    private state: any;
+}
+
+interface SelectableControl extends Control {
+    select(): void;
+}
+
+Classes:
+========
+class Greeter {
+    greeting: string;
+    constructor(message: string) {
+        this.greeting = message;
+    }
+    greet() {
+        return "Hello, " + this.greeting;
+    }
+}
+
+let greeter = new Greeter("world");
+
+Inheritance:
+------------
+class Animal {
+    move(distanceInMeters: number = 0) {
+        console.log(`Animal moved ${distanceInMeters}m.`);
+    }
+}
+
+class Dog extends Animal {
+    bark() {
+        console.log('Woof! Woof!');
+    }
+}
+
+const dog = new Dog();
+dog.bark();
+dog.move(10);
+dog.bark();
+
+super:
+------
+class Animal {
+    name: string;
+    constructor(theName: string) { this.name = theName; }
+    move(distanceInMeters: number = 0) {
+        console.log(`${this.name} moved ${distanceInMeters}m.`);
+    }
+}
+
+class Snake extends Animal {
+    constructor(name: string) { super(name); }
+    move(distanceInMeters = 5) {
+        console.log("Slithering...");
+        super.move(distanceInMeters);
+    }
+}
+
+class Horse extends Animal {
+    constructor(name: string) { super(name); }
+    move(distanceInMeters = 45) {
+        console.log("Galloping...");
+        super.move(distanceInMeters);
+    }
+}
+
+let sam = new Snake("Sammy the Python");
+let tom: Animal = new Horse("Tommy the Palomino");
+
+sam.move();
+tom.move(34);
+
 
