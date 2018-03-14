@@ -854,7 +854,7 @@ Symbols inside the registry are called global symbols.
 
 Using Symbol.for(key), we can create and access global symbol with 'key' in registry.
 
-Symbol.for(key) checks the global registry, and if there’s a symbol described as key, then returns it, otherwise creates a new symbol Symbol(key) and stores it in the registry by the given key.
+Symbol.for(key) checks the global registry, and if there’s a symbol described as key, then returns it, otherwise creates a new symbol with Symbol(key) and stores it in the registry by the given key.
 
 // read from the global registry
 let id = Symbol.for("id"); // if the symbol did not exist, it is created
@@ -916,7 +916,7 @@ So, we need to add Symbol.iterator property for user object. user[Symbol.iterato
 1. When for..of starts, it calls user[Symbol.iterator] method.
 2. The method must return an iterator – an object with the method next.
 3. When for..of wants the next value, it calls next() on that object.
-4. The result of next() must have the form {done: Boolean, value: any}, where done=true means that the iteration is finished, otherwise value must be the new value.
+4. The result of next() must have in the form {done: Boolean, value: any}, where done=true means that the iteration is finished, otherwise value must be the new value.
 
 let user = {
   firstname: 'John',
