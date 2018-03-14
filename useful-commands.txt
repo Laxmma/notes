@@ -56,6 +56,11 @@ Alt + Shift + f => Format code
 
 TypeScript:
 ===========
-tsc temp.ts => compile TS to json
+tsc temp.ts => compile TS to js
+
+tsc temp.ts --watch => compile TS to js and watch for changes
+
+tsc temp.ts --target ES6 => compile to ES6 code
 
 tsc --strictNullChecks temp.ts => enabling the strictNullChecks flag on TS compiler
+

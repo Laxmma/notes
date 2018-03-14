@@ -1,4 +1,5 @@
-var u = undefined;
-var n = null;
-var num = 123;
-num = null;
+function f({ a, b = 1000 } = { a: "test", b: 2000 }) {
+    console.log(a);
+    console.log(b);
+}
+f();

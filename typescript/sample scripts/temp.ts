@@ -1,6 +1,5 @@
-let u: undefined = undefined;
-let n: null = null;
-
-let num:number = 123;
-
-num = null;
+function f({ a, b=1000 }:{ a: string, b?: number } = { a: "test", b: 2000 }): void {
+    console.log(a);
+    console.log(b);
+}
+f();

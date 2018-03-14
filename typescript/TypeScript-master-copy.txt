@@ -177,5 +177,63 @@ let strLength: number = (<string>someValue).length;
 let someValue: any = "this is a string";
 let strLength: number = (someValue as string).length;
 
+let and const:
+==============
+let x: number = 123;
 
+const y: String = 'John Doe';
+
+Destructuring:
+==============
+// Array Destructuring with datatypes
+let [first, second]: [number, number] = [1,2];
+console.log(first);
+console.log(second);
+
+// Object Destructuring with datatypes
+let { a, b }: { a: string, b: number } = {a: 'foo', b: 12};
+console.log(a);
+console.log(b);
+
+// Default values in destructuting
+let { a, b = 1000 }: { a: string, b?: number } = {a: 'foo'};
+console.log(a);
+console.log(b);
+
+'?' represents the optional value / parameter. If we don't specify '?' above, we will get error in compilation.
+
+// Destructuring in functions
+function f({ a, b=1000 }:{ a: string, b?: number } = { a: "test" }): void {
+    console.log(a); // test
+    console.log(b); // 1000
+}
+f();
+
+function f({ a, b=1000 }:{ a: string, b?: number } = { a: "test", , b: 2000 }): void {
+    console.log(a); // test
+    console.log(b); //2000
+}
+f({ a: "test2", b:3000 });
+
+function f({ a, b=1000 }:{ a: string, b?: number } = { a: "test", b: 2000 }): void {
+    console.log(a); // test2
+    console.log(b); // 3000
+}
+f({ a: "test2", b:3000 });
+
+Spread Operator:
+================
+let first = [1, 2];
+let second = [3, 4];
+let bothPlus = [0, ...first, ...second, 5];
+
+we can also spread objects:
+let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
+let search = { ...defaults, cuisine: "chinese" };
+
+// Food 'rich' will be overwritten by spicy.
+let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
+let search = { food: "rich", ...defaults };
+
+While spreading we will loose the methods in the spreaded Object.
 
