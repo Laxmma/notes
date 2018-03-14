@@ -115,4 +115,67 @@ notSure = false; // okay, definitely a boolean
 let list: any[] = [1, true, "free"];
 list[1] = 100;
 
+Void:
+-----
+'void' is a datatype opposite to 'any'. 'void' is used to represent the absence of having any type.
+
+function warnUser(): void {
+    alert("This is my warning message");
+}
+
+Declaring variables of type void is not useful because you can only assign undefined or null to them:
+
+let unusable: void = undefined;
+
+Null and Undefined:
+-------------------
+In TypeScript, both undefined and null actually have their own types named undefined and null respectively. Much like void, they’re not extremely useful on their own:
+
+let u: undefined = undefined;
+let n: null = null;
+
+By default null and undefined are subtypes of all other types. That means you can assign null and undefined to something like number.
+
+let num:number = 123;
+num = null;
+
+If we use strictNullChecks flag, we can't assign null and undefined to other datatyped variables.
+
+tsc --strictNullChecks temp.ts
+
+strictNullChecks is encouraged by TypeScript. As, it can avoid many common errors.
+
+While using strictNullChecks, if we want to accept 'string' or 'undefined' or 'null' for a variable, we can use union datatypes string|undefined|null.
+
+Never:
+------
+'never' type represents the type of values that never occur. For instance, never is the return type for a function expression or an arrow function expression that always throws an exception or one that never returns.
+
+function error(message: string): never {
+    throw new Error(message);
+}
+
+function infiniteLoop(): never {
+    while (true) {
+    }
+}
+
+Type assertions:
+----------------
+Type assertions are a way to tell the compiler “trust me, I know what I’m doing.”
+
+A type assertion is like a type cast in other languages.
+
+Two syntaxes available for type assertion:
+1. angle-bracket
+
+let someValue: any = "this is a string";
+let strLength: number = (<string>someValue).length;
+
+2. as-syntax:
+
+let someValue: any = "this is a string";
+let strLength: number = (someValue as string).length;
+
+
 

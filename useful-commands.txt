@@ -50,6 +50,12 @@ git stash drop stash@{0} => delete stash.
 
 VS Code:
 ========
-Alt + z - Toggle word wrap.
+Alt + z => Toggle word wrap.
 
-Alt + Shift + f - Format code
+Alt + Shift + f => Format code
+
+TypeScript:
+===========
+tsc temp.ts => compile TS to json
+
+tsc --strictNullChecks temp.ts => enabling the strictNullChecks flag on TS compiler
