@@ -1217,9 +1217,13 @@ var obj2 = {
 };
 
 We can write simple expressions in [].
+var obj2 = {
+    [name1+'s']: "John",
+    [name2]: "Doe",
+};
 
-Array changes and Comprehensions:
-=================================
+Array changes:
+==============
 find and findIndex:
 -------------------
 We use indexOf to search for an element in an array.
@@ -1230,11 +1234,11 @@ We can use find() and findIndex() methods for conditional based search.
 
 var numbersArr = [1,2,3];
 
-array.find(function(item){
+numbersArr.find(function(item){
     return item == 2; // Returns first occurance value
 });
 
-array.findIndex(function(item){
+numbersArr.findIndex(function(item){
     return item == 2; // Returns first occurance index
 });
 
@@ -1262,8 +1266,6 @@ var entries = names.entries(); // We can convert to map
 var firstEntry = entries.next().value;
 
 var keys = names.keys();
-
-entries[Symbol.iterator]
 
 Sites to Refer:
 ===============
