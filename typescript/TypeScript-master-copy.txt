@@ -520,7 +520,9 @@ tom.move(34);
 
 Public, private, and protected modifiers:
 -----------------------------------------
-By default all class members are public. We don’t need to mention it. We can still mark a member public explicitly.
+public:
+-------
+By default all class members are public. We don’t need to mention it. But, we can use public explicitly.
 
 class Animal {
     public name: string;
@@ -530,6 +532,8 @@ class Animal {
     }
 }
 
+private:
+--------
 When a member is marked private, it cannot be accessed from outside of its containing class.
 
 class Animal {
@@ -539,3 +543,172 @@ class Animal {
 
 new Animal("Cat").name; // Error: 'name' is private;
 
+protected:
+----------
+protected peoperties can be accessed within the class and only on own class instaces. Can't be accessed from outside or inherited class.
+
+class Person {
+    protected name: string;
+    constructor(name: string) { this.name = name; }
+}
+
+class Employee extends Person {
+    private department: string;
+
+    constructor(name: string, department: string) {
+        super(name);
+        this.department = department;
+    }
+
+    public getElevatorPitch() {
+        return `Hello, my name is ${this.name} and I work in ${this.department}.`;
+    }
+}
+
+let howard = new Employee("Howard", "Sales");
+console.log(howard.getElevatorPitch());
+console.log(howard.name); // error
+
+If we use 'protected' on constructor method, we can’t create object for it, but we can extend that class.
+
+Readonly modifier:
+------------------
+we can make properties readonly by using the readonly keyword. Readonly properties must be initialized at their declaration or in the constructor. 
+
+class Octopus {
+    readonly name: string;
+    readonly numberOfLegs: number = 8;
+    constructor (theName: string) {
+        this.name = theName;
+    }
+}
+let dad = new Octopus("Man with the 8 strong legs");
+dad.name = "Man with the 3-piece suit"; // error! name is readonly.
+
+Parameter properties:
+---------------------
+In our last example, we had to declare a readonly member name and a constructor parameter theName in the Octopus class, and we then immediately set name to theName. This turns out to be a very common practice. Parameter properties let you create and initialize a member in one place. Here’s a further revision of the previous Octopus class using a parameter property:
+
+class Octopus {
+    readonly numberOfLegs: number = 8;
+    constructor(readonly name: string) {
+    }
+}
+
+Notice how we dropped theName altogether and just use the shortened readonly name: string parameter on the constructor to create and initialize the name member. We’ve consolidated the declarations and assignment into one location.
+
+We can use any modifier like public, private, protected, and readonly before parameter properties.
+
+Accessors (getters/setters):
+----------------------------
+let passcode = "secret passcode";
+
+class Employee {
+    private _fullName: string;
+
+    get fullName(): string {
+        return this._fullName;
+    }
+
+    set fullName(newName: string) {
+        if (passcode && passcode == "secret passcode") {
+            this._fullName = newName;
+        }
+        else {
+            console.log("Error: Unauthorized update of employee!");
+        }
+    }
+}
+
+let employee = new Employee();
+employee.fullName = "Bob Smith";
+if (employee.fullName) {
+    console.log(employee.fullName);
+}
+
+Static Properties:
+------------------
+Static members visible on the class itself rather than on the instances. 
+
+class Grid {
+    static origin = {x: 0, y: 0};
+    calculateDistanceFromOrigin(point: {x: number; y: number;}) {
+        let xDist = (point.x - Grid.origin.x);
+        let yDist = (point.y - Grid.origin.y);
+        return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
+    }
+    constructor (public scale: number) { }
+}
+
+console.log(Grid.origin);
+
+let grid1 = new Grid(1.0);
+console.log(grid1.origin); // Get an error.
+
+Abstract Classes:
+-----------------
+Abstract classes are base classes from which other classes may be derived. They may not be instantiated directly. Unlike an interface, an abstract class may contain implementation details for its members. The abstract keyword is used to define abstract classes as well as abstract methods within an abstract class.
+
+abstract class Animal {
+    abstract makeSound(): void;
+    move(): void {
+        console.log("roaming the earth...");
+    }
+}
+
+Methods within an abstract class that are marked as abstract do not contain an implementation and must be implemented in derived classes.
+
+abstract class Department {
+
+    constructor(public name: string) {
+    }
+
+    printName(): void {
+        console.log("Department name: " + this.name);
+    }
+
+    abstract printMeeting(): void; // must be implemented in derived classes
+}
+
+class AccountingDepartment extends Department {
+
+    constructor() {
+        super("Accounting and Auditing"); // constructors in derived classes must call super()
+    }
+
+    printMeeting(): void {
+        console.log("The Accounting Department meets each Monday at 10am.");
+    }
+
+    generateReports(): void {
+        console.log("Generating accounting reports...");
+    }
+}
+
+let department: Department; // ok to create a reference to an abstract type
+department = new Department(); // error: cannot create an instance of an abstract class
+department = new AccountingDepartment(); // ok to create and assign a non-abstract subclass
+department.printName();
+department.printMeeting();
+department.generateReports(); // error: method doesn't exist on declared abstract type
+
+Class datatype:
+---------------
+class Greeter {
+    greeting: string;
+    constructor(message: string) {
+        this.greeting = message;
+    }
+    greet() {
+        return "Hello, " + this.greeting;
+    }
+}
+
+let greeter: Greeter;
+greeter = new Greeter("world");
+console.log(greeter.greet());
+
+Here 'greeter' is a variable of type Greeter.
+
+Functions:
+==========

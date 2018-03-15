@@ -54,6 +54,8 @@ Alt + z => Toggle word wrap.
 
 Alt + Shift + f => Format code
 
+Ctrl + ` => Open terminal
+
 TypeScript:
 ===========
 tsc temp.ts => compile TS to js
