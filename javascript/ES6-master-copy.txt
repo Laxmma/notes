@@ -1167,22 +1167,6 @@ set.add(new Date())
 
 // Need to know the real time usecases.
 
-Array iterator example:
------------------------
-let numbers = [1,2,3,4];
-numbers[Symbol.iterator]
-
-numbers[Symbol.iterator]().next(()
-Object {value: 1, done: false}
-
-// Manual iterator
-let iterator = numbers.values(); // don't work in chrome
-let next = iterator.next();
-while(!next.done){
-    sum += next.value;
-    next = iterator.next(); 
-}
-
 Object changes:
 ===============
 object.assign() - to extend one object.
