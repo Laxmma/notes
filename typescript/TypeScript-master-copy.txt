@@ -125,6 +125,20 @@ If we don't initialize one will become 0, two will become 1, three will become 2
 We can know the name of enum with value.
 level[2000]; // Return two
 
+String enums:
+-------------
+enum Direction {
+    Up = "UP",
+    Down = "DOWN",
+    Left = "LEFT",
+    Right = "RIGHT",
+} // For string enums we need to initialize all the values.
+
+enum BooleanLikeHeterogeneousEnum {
+    No = 0,
+    Yes = "YES",
+} // It's a heterogeneous enum
+
 Any:
 ----
 If we don't know type of variable at the time of writing the application we need to opt for 'any' kind. Sometimes we get data from user/third-party libraries.
@@ -197,6 +211,28 @@ let strLength: number = (<string>someValue).length;
 
 let someValue: any = "this is a string";
 let strLength: number = (someValue as string).length;
+
+Union Types:
+------------
+function padLeft(value: string, padding: any) {
+    if (typeof padding === "number") {
+        return Array(padding + 1).join(" ") + value;
+    }
+    if (typeof padding === "string") {
+        return padding + value;
+    }
+    throw new Error(`Expected string or number, got '${padding}'.`);
+}
+
+As per the above function, padding should be string or number. 
+padLeft('right', true); // TSC can't find error on calling with 'true'.
+
+If we use union, we can restrict to string | number.
+
+function padLeft(value: string, padding: string | number) {
+    console.log(padding);
+}
+padLeft('right', true); // TSC will return error.
 
 let and const:
 ==============
@@ -770,6 +806,255 @@ function buildName(firstName: string, ...restOfName: string[]) {
 
 let employeeName = buildName("Joseph", "Samuel", "Lucas", "MacKinzie");
 
+Generics:
+=========
+Using Generics is a way to accept all kinds of datatypes in safe way without loosing type information.
+
+Let's see below examples to understand the need of generics.
+
+// Return random position from array of positions.
+function randomIntElem(theArray: number[]): number {
+    let randomIndex = Math.floor(Math.random()*theArray.length);
+    return theArray[randomIndex];
+}
+ 
+let positions: number[] = [103, 458, 472, 458];
+let randomPosition: number = randomIntElem(positions);
+
+If we want to make randomIntElem work with string array. We have to write like below.
+function randomStrElem(theArray: string[]): string {
+    let randomIndex = Math.floor(Math.random()*theArray.length);
+    return theArray[randomIndex];
+}
+ 
+let colors: string[] = ['violet', 'indigo', 'blue', 'green'];
+let randomColor: string = randomStrElem(colors);
+
+Here the functionality is same. So we can genaralise the above function like below using 'any' datatype.
+
+function randomElem(theArray: any[]): any {
+    let randomIndex = Math.floor(Math.random()*theArray.length);
+    return theArray[randomIndex];
+}
+ 
+let positions = [103, 458, 472, 458];
+let randomPosition = randomElem(positions);
+ 
+let colors = ['violet', 'indigo', 'blue', 'green'];
+let randomColor = randomElem(colors);
+
+Earlier, we were sure that randomPosition would be a number and randomColor would be a string.
+
+// This code will compile without an error.
+let colors: string[] = ['violet', 'indigo', 'blue', 'green'];
+let randomColor: number = randomElem(colors);
+
+So, If we can't catch the errors in compile time, we may encounter errors in runtime and application will break silently.
+
+A better solution to avoid code duplication while still preserving the type information is to use generics. Here is a generic function that returns random elements from an array.
+
+function randomElem<T>(theArray: T[]): T {
+    let randomIndex = Math.floor(Math.random()*theArray.length);
+    return theArray[randomIndex];
+}
+ 
+let colors: string[] = ['violet', 'indigo', 'blue', 'green'];
+let randomColor: string = randomElem(colors); // 'number' for randomColor, we will get an error while compiling.
 
 
+Type Inference:
+===============
+Infer means conclude something from evidence and reasoning rather than from explicit statements.
 
+Type Inference means concluding datatype of a variable depends on it's value.
+
+If we don't specify the datatype, typescript will infer the datatype depends on it's value.
+
+let x = 3; // x of type number
+
+TypeScript use 'Best common type' algorithm to decide datatype in some cases.
+
+let x = [0, 1, null]; // x will be considered as numerical array as per Best common type algorithm.
+
+let zoo = [new Rhino(), new Elephant(), new Snake()];
+
+zoo will become union of (Rhino | Elephant | Snake)[].
+
+'Contextual Type' is another way deciding type in TS.
+
+Modules:
+========
+Modules are executed within their own scope, not in the global scope;this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported.
+
+In TypeScript, just as in ECMAScript 2015, any file containing a top-level import or export is considered a module. Conversely, a file without any top-level import or export declarations is treated as a script whose contents are available in the global scope.
+
+//Validation.ts
+export interface StringValidator {
+    isAcceptable(s: string): boolean;
+}
+
+//ZipCodeValidator.ts
+import { StringValidator } from "./Validation";
+export const numberRegexp = /^[0-9]+$/;
+
+export class ZipCodeValidator implements StringValidator {
+    isAcceptable(s: string) {
+        return s.length === 5 && numberRegexp.test(s);
+    }
+}
+
+Decorators:
+===========
+Decorators are a stage 2 proposal for JavaScript and are available as an experimental feature of TypeScript.
+
+To enable experimental support for decorators, you must enable the experimentalDecorators compiler option either on the command line or in your tsconfig.json
+
+tsc --target ES5 --experimentalDecorators
+
+tsconfig.json:
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "experimentalDecorators": true
+    }
+}
+
+A Decorator is a special kind of declaration that can be attached to a class declaration, method, accessor, property, or parameter.
+
+Decorators use the form @expression, where expression must evaluate to a function that will be called at runtime with information about the decorated declaration.
+
+@sealed decorator implementation is like below.
+
+function sealed(target) {
+    // do something with 'target' ...
+}
+
+Applying Decorator:
+-------------------
+// Applying sealed decorator to variable x. sealed function will be called with parameter x.
+@sealed x
+
+// Applying multiple decorators in single line. 
+@f @g x
+
+// Applying multiple decorators in multiple lines.
+@f
+@g
+x
+
+First 'g' decorator and then 'f' decorator function will be called.
+'@f @g x' is equivalent to f(g(x))
+
+The following steps are performed when evaluating multiple decorators on a single declaration in TypeScript:
+1. The expressions for each decorator are evaluated top-to-bottom.
+2. The results are then called as functions from bottom-to-top.
+
+function f() {
+    console.log("f(): evaluated");
+    return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
+        console.log("f(): called");
+    }
+}
+
+function g() {
+    console.log("g(): evaluated");
+    return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
+        console.log("g(): called");
+    }
+}
+
+class C {
+    @f()
+    @g()
+    method() {} // Decorators f and g are applied to method.
+}
+
+Output:
+f(): evaluated
+g(): evaluated
+g(): called
+f(): called
+
+Class Decorators:
+-----------------
+A Class Decorator is declared just before a class declaration.
+
+@sealed
+class Greeter {
+    greeting: string;
+    constructor(message: string) {
+        this.greeting = message;
+    }
+    greet() {
+        return "Hello, " + this.greeting;
+    }
+}
+
+function sealed(constructor: Function) {
+    Object.seal(constructor); // Object.seal prevent new properties been added.
+    Object.seal(constructor.prototype);
+}
+
+Method Decorators:
+------------------
+A Method Decorator is declared just before a method declaration.
+
+class Greeter {
+    greeting: string;
+    constructor(message: string) {
+        this.greeting = message;
+    }
+
+    @enumerable(false)
+    greet() {
+        return "Hello, " + this.greeting;
+    }
+}
+
+function enumerable(value: boolean) {
+    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+        descriptor.enumerable = value;
+    };
+}
+
+Accessor Decorators: Decorators on getters and setters.
+--------------------
+An  Accessor Decorator is declared just before an accessor declaration.
+
+class Point {
+    private _x: number;
+    private _y: number;
+    constructor(x: number, y: number) {
+        this._x = x;
+        this._y = y;
+    }
+
+    @configurable(false)
+    get x() { return this._x; }
+
+    @configurable(false)
+    get y() { return this._y; }
+}
+
+function configurable(value: boolean) {
+    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+        descriptor.configurable = value;
+    };
+}
+
+Property Decorators:
+--------------------
+A Property Decorator is declared just before a property declaration
+
+class Greeter {
+    @format("Hello, %s")
+    greeting: string;
+
+    constructor(message: string) {
+        this.greeting = message;
+    }
+    greet() {
+        let formatString = getFormat(this, "greeting");
+        return formatString.replace("%s", this.greeting);
+    }
+}
