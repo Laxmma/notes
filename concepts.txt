@@ -16,17 +16,12 @@ Bootstrap
 Javascript ES6 features
 
 Typescript
-    - Simple app using Typescript (tsc and lite-server)
-    - Build the app using Webpack
+    - Configure simple app using Webpack
 
 Angular
     - App containing pocs
-    - Tutorial app - tour of heros
-    - TO-DO application by toodmoto
-    - App with authentication etc...
-    - Move app to production
-    - Angular 4 with Bootstrap 3 and ngx-bootstrap
-    - Angular 5 with Bootstrap 4 and ng-bootstrap sample
+    - TO-DO application - Do it live, Move app to production (Angular 5 with Bootstrap 4 and ng-bootstrap sample)
+    - Ecommerce store with authenticaton (Angular 4 with Bootstrap 3 and ngx-bootstrap)
     - Angular 2 Vs Angular 4 Vs Angular 5
 	
 Interview Preparation
