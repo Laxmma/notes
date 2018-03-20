@@ -22,6 +22,8 @@ webpack --watch  => build and keep on checking for changes.
 
 webpack -d --watch => build and keep on checking for changes in debug mode.
 
+webpack -display-error-details  => display webpack error
+
 Git:
 ====
 git clone => clone git repo
@@ -54,7 +56,7 @@ Alt + z => Toggle word wrap.
 
 Alt + Shift + f => Format code
 
-Ctrl + ` => Open terminal
+Ctrl + ` => Open/Close terminal
 
 TypeScript:
 ===========

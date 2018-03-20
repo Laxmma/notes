@@ -230,9 +230,19 @@ padLeft('right', true); // TSC can't find error on calling with 'true'.
 If we use union, we can restrict to string | number.
 
 function padLeft(value: string, padding: string | number) {
-    console.log(padding);
+    if (typeof padding === "number") {
+        return Array(padding + 1).join(" ") + value;
+    }
+    if (typeof padding === "string") {
+        return padding + value;
+    }
+    throw new Error(`Expected string or number, got '${padding}'.`);
 }
 padLeft('right', true); // TSC will return error.
+
+Conclusion of Datatypes:
+------------------------ 
+If we use data types, we can catch most of the errors / exceptions in the compilation phase itself.
 
 let and const:
 ==============
@@ -270,7 +280,7 @@ function f({ a, b=1000 }:{ a: string, b?: number } = { a: "test", , b: 2000 }): 
     console.log(a); // test
     console.log(b); //2000
 }
-f({ a: "test2", b:3000 });
+f();
 
 function f({ a, b=1000 }:{ a: string, b?: number } = { a: "test", b: 2000 }): void {
     console.log(a); // test2
@@ -289,13 +299,13 @@ let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
 let search = { ...defaults, cuisine: "chinese" };
 
 // Food 'rich' will be overwritten by spicy.
-let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
+let defaults = { food: "spicy", price: "$$", ambiance: "noisy", add: function() {} };
 let search = { food: "rich", ...defaults };
-
-While spreading we will loose the methods in the spreaded Object.
 
 Interfaces:
 ===========
+We can understand interfaces as custom datatypes.
+
 Interfaces define the shape of a value. TypeScript always check whether the value is in specified format or not. This is called type-checking / duck typing / structural sub typing.
 
 function printLabel(labelledObj: { label: string }) {
@@ -381,16 +391,14 @@ interface SearchFunc {
     (source: string, subString: string): boolean;
 }
 
-let mySearch: SearchFunc;
-mySearch = function(source: string, subString: string) {
+let mySearch: SearchFunc =  = function(source: string, subString: string) {
     let result = source.search(subString);
     return result > -1;
 }
 
 For function types to correctly type-check, the names of the parameters do not need to match. We could have, for example, written the above example like this:
 
-let mySearch: SearchFunc;
-mySearch = function(src: string, sub: string): boolean {
+let mySearch: SearchFunc = function(src: string, sub: string): boolean {
     let result = src.search(sub);
     return result > -1;
 }
@@ -1058,3 +1066,43 @@ class Greeter {
         return formatString.replace("%s", this.greeting);
     }
 }
+
+HTML5 Web APIs in TS:
+=====================
+We can find list of all web api interfaces in below url.
+https://developer.mozilla.org/en-US/docs/Web/API
+
+TypeScript support all the web api interfaces.
+
+private x : HTMLInputElement;
+this.x = <HTMLInputElement>document.getElementById(xId);
+this.x = document.getElementById(xId) as HTMLInputElement;
+
+Below are few html interfaces we frequently use.
+- HTMLInputElement
+- HTMLSpanElement
+- HTMLDivElement
+- HTMLImageElement
+- HTMLTextAreaElement
+- HTMLSelectElement
+- etc...
+
+tsconfig.json File:
+===================
+tsconfig.json is typescript compiler configuration file.
+
+{
+    "compilerOptions": {
+        "target": "es5"
+    }
+}
+
+If a folder contains tsconfig.json file, then that folder will be considered as root folder of the project and the compilerOptions are applied to all the TypeScript files in that directory.
+
+If we run 'tsc' command in the root folder, typescript compiler will go through all the ts files and directories in the root folder and compile all ts files to js files.
+
+** If we pass file name to 'tsc' command, it will not consider tsconfig.json file.
+
+
+
+How to use JavaScript libraries in TypeScript:
