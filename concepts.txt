@@ -16,7 +16,7 @@ Bootstrap
 Javascript ES6 features
 
 Typescript
-    - Configure simple app using Webpack
+    - Configure simple app using Typescript and Webpack
 
 Angular
     - App containing pocs
