@@ -521,14 +521,13 @@ class Animal {
 
 class Dog extends Animal {
     bark() {
-        console.log('Woof! Woof!');
+        console.log('Dog Barking');
     }
 }
 
 const dog = new Dog();
 dog.bark();
 dog.move(10);
-dog.bark();
 
 super:
 ------
@@ -599,7 +598,7 @@ class Person {
 class Employee extends Person {
     private department: string;
 
-    constructor(name: string, department: string) {
+    protected constructor(name: string, department: string) {
         super(name);
         this.department = department;
     }
@@ -609,9 +608,9 @@ class Employee extends Person {
     }
 }
 
-let howard = new Employee("Howard", "Sales");
-console.log(howard.getElevatorPitch());
-console.log(howard.name); // error
+let emp = new Employee("Howard", "Sales");
+console.log(emp.getElevatorPitch());
+console.log(emp.name); // error
 
 If we use 'protected' on constructor method, we can’t create object for it, but we can extend that class.
 
@@ -638,6 +637,7 @@ class Octopus {
     constructor(readonly name: string) {
     }
 }
+let dad = new Octopus("Man with the 8 strong legs");
 
 Notice how we dropped theName altogether and just use the shortened readonly name: string parameter on the constructor to create and initialize the name member. We’ve consolidated the declarations and assignment into one location.
 
