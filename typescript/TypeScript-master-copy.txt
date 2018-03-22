@@ -892,9 +892,9 @@ zoo will become union of (Rhino | Elephant | Snake)[].
 
 Modules:
 ========
-Modules are executed within their own scope, not in the global scope;this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported.
+In TypeScript, just as in ECMAScript 2015(ES6), any file containing a top-level import or export is considered a module. Conversely, a file without any top-level import or export declarations is treated as a script whose contents are available in the global scope.
 
-In TypeScript, just as in ECMAScript 2015, any file containing a top-level import or export is considered a module. Conversely, a file without any top-level import or export declarations is treated as a script whose contents are available in the global scope.
+Modules are executed within their own scope, not in the global scope;this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported.
 
 //Validation.ts
 export interface StringValidator {
@@ -974,7 +974,7 @@ function g() {
 class C {
     @f()
     @g()
-    method() {} // Decorators f and g are applied to method.
+    add() {} // Decorators f and g are applied to method.
 }
 
 Output:
@@ -1002,6 +1002,7 @@ function sealed(constructor: Function) {
     Object.seal(constructor); // Object.seal prevent new properties been added.
     Object.seal(constructor.prototype);
 }
+
 
 Method Decorators:
 ------------------
@@ -1104,5 +1105,24 @@ If we run 'tsc' command in the root folder, typescript compiler will go through 
 ** If we pass file name to 'tsc' command, it will not consider tsconfig.json file.
 
 
-
 How to use JavaScript libraries in TypeScript:
+----------------------------------------------
+We need to install typings file of JavaScript library to work.
+
+To install typings file for jQuery we need to run below.
+npm install --save-dev @types/jquery
+
+After adding the typings file, include jquery in index.html file, then jQuery starts working.
+
+Need for typings file:
+function displayMessage(message) {
+    alert(message);
+}
+
+With this file alone, my TypeScript code won't have any clue this function exists. It won't know its name and it won't know its parameters. We can fix this by describing it in a definition file as such (Example.d.ts):
+
+declare function displayMessage(message: string);
+
+
+
+*** Fine tune examples for Decorators.

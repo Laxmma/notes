@@ -1,11 +1,21 @@
-class Grid {
-    static origin = {x: 0, y: 0};
-    calculateDistanceFromOrigin(point: {x: number; y: number;}) {
-        let xDist = (point.x - Grid.origin.x);
-        let yDist = (point.y - Grid.origin.y);
-        return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
+class Greeter {
+    greeting: string;
+    constructor(message: string) {
+        this.greeting = message;
     }
-    constructor (public scale: number) { }
+
+    @enumerable(false)
+    greet() {
+        return "Hello, " + this.greeting;
+    }
 }
 
-console.log(Grid.origin);
+function enumerable(value: boolean) {
+    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+        descriptor.enumerable = value;
+    };
+}
+
+let greet = new Greeter('World');
+let msg = greet.greet();
+let len = msg.length;
